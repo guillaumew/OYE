@@ -1,0 +1,20 @@
+{
+  "name": "mytimeline",
+  "version": "0.0.1",
+  "engines": {
+    "node": "5.9.1"
+  },
+  "dependencies": {
+    "express": "^4.10.6",
+    "mysql": "^2.5.4",
+    "ejs": "^2.5.2"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guillaumew/mytimeline"
+  }
+}
