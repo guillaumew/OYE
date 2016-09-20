@@ -21,7 +21,6 @@ var connection = mysql.createConnection({
 
 
 app.get('/', function(request, response) {
-	connection.connect();
 	connection.query('SELECT * from Tags', function(err, rows, fields) {
 		if (!err) {
 			response.render('pages/index',{"tags":rows});
@@ -31,7 +30,6 @@ app.get('/', function(request, response) {
 			console.log(err);
 		}
 	});
-	connection.end();
 });
 
 app.listen(app.get('port'), function() {
