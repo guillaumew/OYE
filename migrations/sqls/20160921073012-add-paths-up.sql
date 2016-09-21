@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS Tags;
-
 CREATE TABLE Tags (
   id smallint unsigned NOT NULL AUTO_INCREMENT,
   name varchar(40) NOT NULL,

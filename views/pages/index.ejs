@@ -7,8 +7,8 @@
 <body>
 	<img src="verne.jpg" />
 	<ul>
-    <% tags.forEach(function(r) { %>
-        <li><%= r.id %> - <%= r.name %></li>
+    <% paths.forEach(function(r) { %>
+        <li><a href="/path/<%= r.id %>"><%= r.name %></a></li>
     <% }); %>
 </ul>
 </body>
