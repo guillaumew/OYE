@@ -5,6 +5,7 @@
     "password": {"ENV": "DATABASE_PASSWORD"},
     "database": {"ENV": "DATABASE_SCHEMA"},
     "user": {"ENV": "DATABASE_USER"},
+    "port" : {"ENV": "DATABASE_PORT"},
     "multipleStatements": true
   },
   "prod": {
@@ -13,6 +14,7 @@
     "password": {"ENV": "DATABASE_PASSWORD"},
     "database": {"ENV": "DATABASE_SCHEMA"},
     "user": {"ENV": "DATABASE_USER"},
+    "port" : {"ENV": "DATABASE_PORT"},
     "multipleStatements": true
   },
   "sql-file" : true,
