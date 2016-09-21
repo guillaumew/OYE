@@ -1,7 +1,7 @@
 {
   "dev": {
     "driver": "mysql",
-    "user": {"ENV": "DATABASE_HOST"},
+    "host": {"ENV": "DATABASE_HOST"},
     "password": {"ENV": "DATABASE_PASSWORD"},
     "database": {"ENV": "DATABASE_SCHEMA"},
     "user": {"ENV": "DATABASE_USER"},
@@ -10,7 +10,7 @@
   },
   "prod": {
     "driver": "mysql",
-    "user": {"ENV": "DATABASE_HOST"},
+    "host": {"ENV": "DATABASE_HOST"},
     "password": {"ENV": "DATABASE_PASSWORD"},
     "database": {"ENV": "DATABASE_SCHEMA"},
     "user": {"ENV": "DATABASE_USER"},
