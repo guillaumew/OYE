@@ -1,9 +1,30 @@
+@font-face{
+	font-family: "multicolore";
+    src: url('../multicolore.otf');
+}
+
 body{
 	margin: 0;
 }
 h1{
+	font-family: "multicolore", Helvetica, Arial, sans-serif;
 	height: 75px;
+	text-align: center;
+	margin: 10px;
+	color: #121326;
 }
+h4{
+	font-family: "multicolore", Helvetica, Arial, sans-serif;
+	text-align: center;
+}
+
+.logo{
+	width: 200px;
+	margin-left: -100px;
+	left:50%;
+    position: relative;
+}
+
 #main_frame{
 	position: fixed;
 	width: 100%;
@@ -29,16 +50,20 @@ h1{
 }
 
 #position_content{
+	font-family: "multicolore", Helvetica, Arial, sans-serif;
 	position: absolute;
     width: 140px;
     color: white;
-    font-size: 25px;
+    font-size: 22px;
     left: 30px;
-    top: 75px;
+    top: 78px;
 }
 
 #map{
-	height: 400px;
+	margin-top: 20px;
+	height: 350px;
+	left: 5%;
+    width: 90%;
 }
 
 #main_content{
@@ -85,14 +110,17 @@ h1{
 	width:100%;
 }
 #objects_title{
+	font-family: "multicolore", Helvetica, Arial, sans-serif;
 	background-color: #121326;
 	color: #FFFFFF;
-	font-size: 20px;
+	font-size: 18px;
+	padding-top: 2px;
     font-weight: bold;
     width: 100px;
     position: relative;
     left: 20px;
     text-align: center;
+    bottom: -1px;
     border-radius: 10px 10px 0px 0px;
 }
 #objects_list{
