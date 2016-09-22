@@ -33,7 +33,7 @@ app.get('/', function(request, response) {
 });
 
 app.get('/path/:pageid', function(request,response){
-	connection.query('SELECT name, init_content from Paths where id='+request.params.pageid, function(err, path, fields) {
+	connection.query('SELECT name, init_content, win_content, give_objects, open_places from Paths where id='+request.params.pageid, function(err, path, fields) {
 		if (!err) {
 			if(path.length > 0){
 				response.render('pages/path',{"path":path[0]});
@@ -43,6 +43,37 @@ app.get('/path/:pageid', function(request,response){
 		}else{
 			response.render('pages/error',{"content":err});
 			console.log('Error while performing Query.');
+			console.log(err);
+		}
+	});
+});
+
+app.get('/getObject/:objectid', function(request,response){
+	connection.query('SELECT * from Objects where id='+request.params.objectid, function(err, raws, fields) {
+		if (!err) {
+			if(raws.length > 0){
+				response.json(raws[0]);
+			}else{
+				response.json({"error" : "The requested object does not exist in the database."});
+			}
+		}else{
+			response.json({"error" : err});
+			console.log('Error while performing Query.');
+			console.log(err);
+		}
+	});
+});
+
+app.get('/getPlace/:Placeid', function(request,response){
+	connection.query('SELECT * from Places where id='+request.params.Placeid, function(err, raws, fields) {
+		if (!err) {
+			if(raws.length > 0){
+				response.json(raws[0]);
+			}else{
+				response.json({"error" : "The requested place does not exist in the database."});
+			}
+		}else{
+			response.json({"error" : err});
 			console.log(err);
 		}
 	});

@@ -1,11 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <% include ../partials/header.ejs %>
+	<% include ../partials/header.ejs %>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk-e2vIralT717kd6wbv2_gpcSbGyByxM&callback=mapReady"
+        async defer></script>
 </head>
 
 <body>
 	<h1><%= path.name %></h1>
-	<div><%= path.init_content %></div>
+	<div id="main_frame">
+		<div id="position">
+			<div id="postion_update" onclick="checkPosition()"><span id="position_content">Vérifier ma position</span></div>
+		</div>
+		<div id="map"></div>
+	</div>
+	<div id="main_content">
+		<img src="../img/close.png" id="close_content" onclick="closeContent();">
+		<div id="current_content">
+			<h4>Le commencement</h4>
+			<div><%- path.init_content %></div>
+		</div>
+	</div>
+	<div id="objects_container">
+		<div id="objects_title">Objets</div>
+		<div id="objects_list"></div>
+	</div>
+	<script type="text/javascript">
+		function closeContent(){
+			document.getElementById("main_content").style.display ="none";
+		}
+	</script>
+	<script type="text/javascript" src="../scripts/path.js"></script>
+	<script type="text/javascript">
+		var initial_object = "<%- path.give_objects %>";
+		if(initial_object.length > 0){
+			var array_objects = initial_object.split(",");
+			for(var i=0;i<array_objects.length;i++){
+				giveObjects(array_objects[i]);
+			}
+		}
+		
+		var initial_place = "<%- path.open_places %>";
+		if(initial_place.length > 0){
+			var array_places = initial_place.split(",");
+			for(var i=0;i<array_places.length;i++){
+				openPlaces(array_places[i]);
+			}
+		}
+	</script>
 </body>
 </html>
