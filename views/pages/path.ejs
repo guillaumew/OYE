@@ -21,25 +21,47 @@
 			<div><%- path.init_content %></div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		var objects = [];
+		var initial_objects = [];
+		var temp_init_obj = "<%- path.give_objects %>";
+		if(temp_init_obj.length > 0){
+			initial_objects = temp_init_obj.split(",");
+		}
+		function htmlDecode(input){
+			var e = document.createElement('div');
+			e.innerHTML = input;
+			return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+		}
+	</script>
 	<div id="objects_container">
 		<div id="objects_title">Objets</div>
-		<div id="objects_list"></div>
+		<div id="objects_list">
+			<% var object_client_id=0 %>
+			<% objects.forEach(function(obj) { %>
+				<% include ../partials/object_item.ejs obj %>
+					<script type="text/javascript">
+						var current_obj = JSON.parse(htmlDecode("<%= JSON.stringify(obj) %>"));
+						current_obj.is_visible = false ;
+						if(initial_objects.indexOf(current_obj.id.toString())!=-1){
+							current_obj.is_visible = true ;
+							document.querySelector(".object[object_id='"+current_obj.id+"']").style.display = "inherit";
+						}
+						objects.push(current_obj);
+					</script>
+			<% }); %>
+		</div>
 	</div>
 	<script type="text/javascript">
 		function closeContent(){
 			document.getElementById("main_content").style.display ="none";
 		}
+
+		var path_lat = <%- path.latitude %>;
+		var path_long = <%- path.longitude %>;
 	</script>
 	<script type="text/javascript" src="../scripts/path.js"></script>
 	<script type="text/javascript">
-		var initial_object = "<%- path.give_objects %>";
-		if(initial_object.length > 0){
-			var array_objects = initial_object.split(",");
-			for(var i=0;i<array_objects.length;i++){
-				giveObjects(array_objects[i]);
-			}
-		}
-		
 		var initial_place = "<%- path.open_places %>";
 		if(initial_place.length > 0){
 			var array_places = initial_place.split(",");

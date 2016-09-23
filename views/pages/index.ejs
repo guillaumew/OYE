@@ -10,7 +10,7 @@
 	<p>Liste des parcours disponibles</p>
 	<ul>
     <% paths.forEach(function(r) { %>
-        <li><a href="/path/<%= r.id %>"><%= r.name %></a></li>
+    <% include ../partials/path_item.ejs r %>
     <% }); %>
 </ul>
 </body>

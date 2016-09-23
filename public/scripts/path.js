@@ -1,31 +1,34 @@
-var objects = [];
 var places = [];
 var check_position_available = true;
-
+var map;
+var myPosition;
 
 function mapReady(){
-	var map = new google.maps.Map(document.getElementById('map'), {
-		center: {lat:47.216671,lng:-1.55},
+	if(path_lat && path_long)
+	map = new google.maps.Map(document.getElementById('map'), {
+		center: {lat:path_lat,lng:path_long},
 		scrollwheel: false,
-		zoom: 14
+		zoom: 15
 	});
 }
 
 function updateMap(pos){
 
-	var myLatLng = pos;
+	if(!map){
+		map = new google.maps.Map(document.getElementById('map'), {
+			center: pos,
+			scrollwheel: false,
+			zoom: 16
+		});		
+	}
 
-	var map = new google.maps.Map(document.getElementById('map'), {
-		center: myLatLng,
-		scrollwheel: false,
-		zoom: 16
-	});
-
-	var marker = new google.maps.Marker({
+	myPosition = new google.maps.Marker({
 		map: map,
-		position: myLatLng,
+		position: pos,
 		title: 'My Position'
 	});
+	myPosition.setMap(map);
+	map.setCenter(pos);
 }
 
 
@@ -42,8 +45,20 @@ function computeDistance(coords1,coords2){
 
 }
 
+function addMarkerToMap(lat,long){
+	var position = new google.maps.LatLng(lat,long);
+	var iPlace = new google.maps.Marker({
+		map: map,
+		position: position,
+		title: "Lieu d'intérêt",
+		icon: "../img/grey_pin.png"
+	});
+	iPlace.setMap(map);
+}
+
 function displayPlace(client_id){
 	displayItem(places[client_id]);
+	addMarkerToMap(places[client_id].latitude,places[client_id].longitude)
 }
 
 function checkPlaceReached(position){
@@ -97,21 +112,19 @@ function getPlace(id, callback){
 	req.send(null);
 }
 
-function getObject(id, callback){
-	var req = new XMLHttpRequest();
-	req.open('GET', '/getObject/'+id, true);
-	req.onreadystatechange = function (aEvt) {
-		if (req.readyState == 4) {
-			if(req.status == 200)
-				callback(JSON.parse(req.responseText));
+function getObjectClientId(id){
+	for(var i=0;i<objects.length;i++){
+		if(objects[i].id == id){
+			return i;
 		}
-	};
-	req.send(null);
+	}
+	console.log("Not found");
+	return -1;
 }
 
 function checkIfObjectExists(id){
 	for(var i=0;i<objects.length;i++){
-		if(objects[i].id == id){
+		if(objects[i].id == id && objects[i].is_visible){
 			return true;
 		}
 	}
@@ -130,39 +143,54 @@ function displayObject(client_id){
 
 function displayItem(item){
 	
-	if(item.objects_on_open){
-		var objectsToGive = item.objects_on_open.split(",");
+	itemUnlocks(item.objects_on_open,item.places_on_open);
+
+	if(item.success_condition === "object" && checkIfObjectExists(item.success_key)){
+		displayItemContent(item.name,item.success_content, item.success_content_type, "../"+item.success_media);
+		itemUnlocks(item.objects_on_success, item.places_on_success);
+	}else{
+		displayItemContent(item.name,item.content, item.content_type, "../"+item.media);
+	}
+
+}
+
+function itemUnlocks(stringObj,stringPla){
+	if(stringObj){
+		var objectsToGive = stringObj.split(",");
 		for(var i=0;i<objectsToGive.length;i++){
 			giveObjects(objectsToGive[i]);
 		}
 	}
 
-	if(item.places_on_open){
-		var placeToOpen = item.places_on_open.split(",");
+	if(stringPla){
+		var placeToOpen = stringPla.split(",");
 		for(var i=0;i<placeToOpen.length;i++){
 			openPlace(placeToOpen[i]);
 		}
 	}
+}
+
+function displayItemContent(name,caption,media_type,media_url){
 
 	var container = document.getElementById("current_content");
 	container.innerHTML = "";
 	document.getElementById("main_content").style.display ="block";
 	var title = document.createElement("h4");
-	title.innerHTML = item.name;
+	title.innerHTML = name;
 	container.appendChild(title);
 
-	switch (item.content_type){
+	switch (media_type){
 		case "img":
-			caption = document.createElement("p");
-			caption.innerHTML = item.content;
-			container.appendChild(caption);
+			caption_el = document.createElement("p");
+			caption_el.innerHTML = caption;
+			container.appendChild(caption_el);
 
-			media = document.createElement(item.content_type);
-			media.src = "../" + item.media;
+			media = document.createElement(media_type);
+			media.src = "../" + media_url;
 			container.appendChild(media);
 
 			a = document.createElement("a");
-			a.href= "../" + item.media;
+			a.href= "../" + media_url;
 			a.innerHTML = "Voir le media dans un nouveau tab";
 			a.target = "_new";
 			container.appendChild(a);
@@ -170,39 +198,20 @@ function displayItem(item){
 			break;
 		default:
 			var description = document.createElement("div");
-			description.innerHTML = item.content;
+			description.innerHTML = caption;
 			container.appendChild(description);
 
 	}
 }
 
-function showObject(object){
-	var container = document.getElementById("objects_list");
-	
-	var object_container = document.createElement("div");
-	object_container.classList.add("object");
-	object_container.setAttribute("object_id",object.id);
-	object_container.setAttribute("onclick","displayObject("+object.client_id+");");
-	
-	var object_img = document.createElement("img");
-	object_img.src = "../" + object.thumb;
-
-	var object_title = document.createElement("span");
-	object_title.innerHTML = object.name;
-
-	object_container.appendChild(object_img);
-	object_container.appendChild(object_title);
-	container.appendChild(object_container);
-}
-
-function writeObject(object){
-	if(!checkIfObjectExists(object.id)){
-		objects.push(object);
-		object.client_id = objects.length - 1 ;
-		showObject(object);
-	}
+function showObject(client_id){
+	document.querySelector(".object[object_id='"+current_obj.id+"']").style.display = "inherit";
 }
 
 function giveObjects(id){
-	getObject(id, writeObject);
+	var client_id = getObjectClientId(id);
+	if(!objects[client_id].is_visible){
+		showObject(client_id);
+		objects[client_id].is_visible = true;
+	}
 }

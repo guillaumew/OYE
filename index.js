@@ -33,17 +33,25 @@ app.get('/', function(request, response) {
 });
 
 app.get('/path/:pageid', function(request,response){
-	connection.query('SELECT name, init_content, win_content, give_objects, open_places from Paths where id='+request.params.pageid, function(err, path, fields) {
-		if (!err) {
+	connection.query('SELECT name, init_content, win_content, give_objects, open_places, latitude, longitude from Paths where id='+request.params.pageid, function(err1, path, fields) {
+		if (!err1) {
 			if(path.length > 0){
-				response.render('pages/path',{"path":path[0]});
+				connection.query('SELECT * from Objects where path_id='+request.params.pageid, function(err2, objects, fields) {
+					if (!err2) {
+						response.render('pages/path',{"path":path[0], "objects":objects});
+					}else{
+						response.render('pages/error',{"content":err2});
+						console.log('Error while performing Query.');
+						console.log(err2);
+					}
+				});
 			}else{
 				response.render('pages/error',{"content":"The requested path does not exist in the database."});
 			}
 		}else{
-			response.render('pages/error',{"content":err});
+			response.render('pages/error',{"content":err1});
 			console.log('Error while performing Query.');
-			console.log(err);
+			console.log(err1);
 		}
 	});
 });
