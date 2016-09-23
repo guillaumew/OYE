@@ -204,14 +204,14 @@ function displayItemContent(name,caption,media_type,media_url){
 	}
 }
 
-function showObject(client_id){
-	document.querySelector(".object[object_id='"+current_obj.id+"']").style.display = "inherit";
+function showObject(id){
+	document.querySelector(".object[object_id='"+ id +"']").style.display = "inherit";
 }
 
 function giveObjects(id){
 	var client_id = getObjectClientId(id);
 	if(!objects[client_id].is_visible){
-		showObject(client_id);
+		showObject(id);
 		objects[client_id].is_visible = true;
 	}
 }

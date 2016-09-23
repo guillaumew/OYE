@@ -71,10 +71,15 @@ INSERT INTO Paths (name, init_content, win_content, give_objects, latitude, long
 );
 
 INSERT INTO Objects (name, thumb, media, objects_on_open, places_on_open, content, content_type, path_id) VALUES 
-("Lettre de Elie à Romain", "img/1/lettreElieRomain_thumb.jpg", "img/1/lettreElieRomain.jpg", NULL, "1,2", "Cela ressemble à une correspondance entre deux amis.", "img", 1);
-INSERT INTO Objects (name, thumb, media, objects_on_open, places_on_open, content, content_type, path_id, success_condition, success_key, success_content) VALUES 
-("Clé du garage d\'Elie", "img/1/cleElie_thumb.jpg","img/1/cleElie.jpg", NULL, NULL, "Romain t\'a remis cette clé qui ouvre le garage d\'Elie.", "img", 1, "password", 5832, "Vous ouvrez le coffre. A l'intérieur se trouve une bouteille d'absinthe.");
+("Lettre de Elie à Romain", "img/1/lettreElieRomain_thumb.jpg", "img/1/lettreElieRomain.jpg", NULL, "1,2", "Cela ressemble à une correspondance entre deux amis.", "img", 1),
+("Clé du garage d\'Elie", "img/1/cleElie_thumb.jpg","img/1/cleElie.jpg", NULL, NULL, "Romain t\'a remis cette clé qui ouvre le garage d\'Elie.", "img", 1);
 
+INSERT INTO Objects (name, thumb, media, objects_on_open, places_on_open, content, content_type, path_id, success_condition, success_key, success_content,objects_on_success) VALUES 
+("Coffre à combinaison", "img/1/coffre_thumb.jpg","img/1/coffre.jpg",NULL,"3","C'est un vieux coffre avec une combinsaison à 4 chiffres. Un éléphant est gravé près de la serrure.","img",1, "password", "5832", "Tu ouvres le coffre. A l'intérieur se trouve une bouteille d'absinthe.","4");
+
+INSERT INTO Objects (name, thumb, media, objects_on_open, places_on_open, content, content_type, path_id) VALUES 
+("Bouteille d'absinthe \'Sauvage\'", "img/1/absinthe_thumb.jpg", "img/1/absinthe.jpg",NULL,NULL,"La bouteille est vide. Elle a l\'air d\'avoir traversé quelques siècles.","img",1),
+("Note de Jules Verne", "img/1/note_verne_thumb.jpg", "img/1/note_verne.jpg", NULL, "5,6","Une note griffonnée que tu as reçu de la concierge de l'immeuble.","img",1);
 
 INSERT INTO Places 
 SET name='Appartement de Romain', latitude=47.2124513, longitude=-1.5640725000000657, objects_on_open='2', 
@@ -85,7 +90,7 @@ SET name="Appartement d\'Elie",
 latitude=47.2102543,
 longitude=-1.566128899999967,
 objects_on_success="3",
-places_on_success="3",
+places_on_success=NULL,
 content="<p>Tu te trouves au pied de l\'immeuble de ce fameux Elie qui cherchait le trésor de Jules Verne. Malheureusement, la porte est fermée. Tu essaies de sonner chez les voisins, mais personne ne te répond.</p><p>Il vaut peut-être mieux rendre visite à son ami Romain.</p>",
 success_condition="object",
 success_key="2",
