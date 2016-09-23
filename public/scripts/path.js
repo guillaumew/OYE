@@ -146,10 +146,14 @@ function displayItem(item){
 	itemUnlocks(item.objects_on_open,item.places_on_open);
 
 	if(item.success_condition === "object" && checkIfObjectExists(item.success_key)){
-		displayItemContent(item.name,item.success_content, item.success_content_type, "../"+item.success_media);
+		displayItemContent(item.name,item.success_content, item.success_content_type, "../"+item.success_media, null);
 		itemUnlocks(item.objects_on_success, item.places_on_success);
 	}else{
-		displayItemContent(item.name,item.content, item.content_type, "../"+item.media);
+		if(item.success_condition === 'password'){
+			displayItemContent(item.name,item.content, item.content_type, "../"+item.media,item.success_key);
+		}else{
+			displayItemContent(item.name,item.content, item.content_type, "../"+item.media);
+		}
 	}
 
 }
@@ -170,7 +174,7 @@ function itemUnlocks(stringObj,stringPla){
 	}
 }
 
-function displayItemContent(name,caption,media_type,media_url){
+function displayItemContent(name,caption,media_type,media_url, password){
 
 	var container = document.getElementById("current_content");
 	container.innerHTML = "";
@@ -201,6 +205,12 @@ function displayItemContent(name,caption,media_type,media_url){
 			description.innerHTML = caption;
 			container.appendChild(description);
 
+	}
+	if(password){
+		var input = document.createElement("input");
+		input.type = "text";
+		input.placeholder = "not yet implemented";
+		container.appendChild(input);
 	}
 }
 

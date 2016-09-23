@@ -35,18 +35,18 @@ h4{
 #position{
 	width: 100%;
 	text-align: center;
-	height: 200px;
+	height: 150px;
 }
 
 #postion_update{
 	text-align: center;
     background-color: #121326;
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
     position: absolute;
     left: 50%;
-    margin-left: -100px;
+    margin-left: -75px;
 }
 
 #position_content{
@@ -54,9 +54,9 @@ h4{
 	position: absolute;
     width: 140px;
     color: white;
-    font-size: 22px;
-    left: 30px;
-    top: 78px;
+    font-size: 18px;
+    left: 6px;
+    top: 62px;
 }
 
 #map{
@@ -68,7 +68,7 @@ h4{
 
 #main_content{
 	position: absolute;
-	top:80px;
+	top:10px;
 	bottom: 130px;
 	left:20px;
 	right:20px;
