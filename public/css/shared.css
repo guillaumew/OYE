@@ -16,3 +16,21 @@ input[type=submit] {
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
+
+#flash_message{
+	position: fixed;
+    background: grey;
+    left: 0;
+    color: white;
+    padding: 5px;
+    border: 1px solid black;
+    margin: 5px;
+    right: 0;
+    top: 0;
+    font-size: 20px;
+    border-radius: 5px;
+    display: none;
+    z-index: 2000;
+    top: 20px;
+    font-weight: bold;
+}

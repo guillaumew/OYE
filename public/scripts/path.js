@@ -3,6 +3,7 @@ var check_position_available = true;
 var map;
 var myPosition;
 var current_item;
+
 function toggleFullScreen() {
   if (!document.fullscreenElement &&    // alternative standard method
       !document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods
@@ -52,9 +53,16 @@ function updateMap(pos){
 	map.setCenter(pos);
 }
 
+function hideflash(){
+	document.getElementById("flash_message").style.display ="none";
+}
 
 function flashMessage(message,color){
-	console.log(message);
+	flash_el = document.getElementById("flash_message");
+	flash_el.innerHTML = message;
+	flash_el.style.background = color;
+	flash_el.style.display = "block";
+	setTimeout(hideflash,2000);
 }
 
 function computeDistance(coords1,coords2){
@@ -249,9 +257,9 @@ function giveObjects(id){
 function passwordSubmit(){
 	var password_input = document.getElementById("password_input");
 	if(password_input.getAttribute("psw") === password_input.value){
-		flashMessage("success");
+		flashMessage("Bien joué ! C'est la bonne réponse.", "green");
 		itemSuccess(current_item);
 	}else{
-		flashMessage("perdu");
+		flashMessage("Désolé... ce n'est pas la solution.","red");
 	}
 }
