@@ -21,7 +21,7 @@ var connection = mysql.createConnection({
 
 
 app.get('/', function(request, response) {
-	connection.query('SELECT id, name from Paths', function(err, rows, fields) {
+	connection.query('SELECT id, name, type, thumb from Paths', function(err, rows, fields) {
 		if (!err) {
 			response.render('pages/index',{"paths":rows});
 		}else{

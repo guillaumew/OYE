@@ -1,1 +1,16 @@
-<li><a href="/path/<%= r.id %>"><%= r.name %></a></li>
+<a href="/path/<%= r.id %>" class="item_path">
+	<div class="item">
+		<% if (r.thumb) { %>
+		<div class="inline"><img src="<%- r.thumb %>" class="path_thumb"></div>
+		<% } %>
+		<div class="inline">
+			<div>
+				<h4><%= r.name %></h4>
+			</div>
+			<div>
+				<span class="strong">Type : </span>
+				<span><%= r.type %></span>
+			</div>
+		</div>
+	</div>
+</a>

@@ -2,16 +2,17 @@
 <html>
 <head>
   <% include ../partials/header.ejs %>
+  <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 
 <body>
 	<img src="img/logo.png" class="logo" />
 	<h1>Open Your Eyes</h1>
 	<p>Liste des parcours disponibles</p>
-	<ul>
+	<div>
     <% paths.forEach(function(r) { %>
-    <% include ../partials/path_item.ejs r %>
+    	<% include ../partials/path_item.ejs r %>
     <% }); %>
-</ul>
+	</div>
 </body>
 </html>

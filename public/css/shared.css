@@ -1,3 +1,23 @@
+@font-face{
+    font-family: "multicolore";
+    src: url('../multicolore.otf');
+}
+
+body{
+    margin: 0;
+}
+h1{
+    font-family: "multicolore", Helvetica, Arial, sans-serif;
+    text-align: center;
+    margin: 10px;
+    color: #121326;
+    font-size: 25px;
+}
+h4{
+    font-family: "multicolore", Helvetica, Arial, sans-serif;
+    text-align: center;
+}
+
 input[type=text] {
 	padding:5px; 
 	border:2px solid #ccc; 
@@ -33,4 +53,11 @@ input[type=submit] {
     z-index: 2000;
     top: 20px;
     font-weight: bold;
+}
+
+.strong{
+    font-weight: bold;
+}
+.inline{
+    display: inline-block;
 }

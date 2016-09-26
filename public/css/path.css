@@ -1,41 +1,20 @@
-@font-face{
-	font-family: "multicolore";
-    src: url('../multicolore.otf');
-}
 
-body{
-	margin: 0;
-}
-h1{
-	font-family: "multicolore", Helvetica, Arial, sans-serif;
-	text-align: center;
-	margin: 10px;
-	color: #121326;
-	width: 300px;
-}
 #header{
 	height: 75px;
 	display: inline-block;
 }
+#header_title{
+	width:250px;
+	display: inherit;
+}
 #fullscreen{
 	background: url(../img/fullscreen.png);
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     display: inherit;
     background-size: contain;
+    margin: 10px;
 }
-h4{
-	font-family: "multicolore", Helvetica, Arial, sans-serif;
-	text-align: center;
-}
-
-.logo{
-	width: 200px;
-	margin-left: -100px;
-	left:50%;
-    position: relative;
-}
-
 #main_frame{
 	position: fixed;
 	width: 100%;

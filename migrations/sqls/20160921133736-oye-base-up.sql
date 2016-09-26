@@ -62,8 +62,9 @@ CREATE TABLE Objects (
 		REFERENCES Paths(id) 
 ) ENGINE=InnoDB CHARSET=utf8;
 
-INSERT INTO Paths (name, init_content, win_content, give_objects, latitude, longitude) VALUES
-("Le trésor de Jules Verne", 
+INSERT INTO Paths (thumb, name, init_content, win_content, give_objects, latitude, longitude) VALUES
+("img/1/verne.png",
+	"Le trésor de Jules Verne", 
 "<p>Tu achèves tranquillement, la lecture de 'Le tour du monde en 80 jours' de Jules Vernes. Arrivé(e) à la dernière page, une feuille pliée en quatre s'échappe et tombe à tes pieds.</p>",
 "<p>Le barman sourit, et pointe du doigt un client qui lit tranquillement accoudé au bar.</p><p>'Je pense que vous cherchez Elie', vous répond-il au lieu de vous servir un verre.</p><p> Le client bondit vers vous, hilare.</p><p>'Vous avez trouvé le trésor de Jules Vernes', hurle-t-il.'Vous êtes devenus riche d'imagination ! Vous avez arpenté les rues de Nantes et vous y avez découvert de nouveaux visages. Peut-être même que vous avez eu le temps d'apprendre quelques choses sur cette merveilleuse ville. Avez-vous pris le temps de visiter les ateliers des machines ? Avez-vous goûté les meringues chez Au Merveilleux ?'</p><p> Le trésor de Jules Verne semble plus consister en une philosophie de vie qu'en amas d'or. J'espère que tu te sens tout de même enrichi de cette expérience.</p>",
 "1",
