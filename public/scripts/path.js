@@ -160,10 +160,20 @@ function checkIfObjectExists(id){
 	return false;
 }
 
-function openPlace(id){
-	getPlace(id,addPlaceToList);
+function checkIfPlaceExists(id){
+	for(var i=0;i<places.length;i++){
+		if(places[i].id == id){
+			return true;
+		}
+	}
+	return false;
 }
 
+function openPlace(id){
+	if(!checkIfPlaceExists(id)){
+		getPlace(id,addPlaceToList);
+	}
+}
 
 
 function displayObject(client_id){
@@ -217,7 +227,9 @@ function displayItemContent(name,caption,media_type,media_url, password){
 	media_container.innerHTML = "";
 
 	switch (media_type){
-		case "img":
+		case "img": 
+		case "audio":
+		case "video":
 
 			media = document.createElement(media_type);
 			media.src = "../" + media_url;
@@ -230,6 +242,13 @@ function displayItemContent(name,caption,media_type,media_url, password){
 			media_container.appendChild(a);
 
 			break;
+			
+		case "iframe":
+			media = document.createElement(media_type);
+			media.src = "../" + media_url;
+			media_container.appendChild(media);
+			break; 
+
 	}
 
 	var password_container = document.getElementById("content_password");
@@ -262,4 +281,8 @@ function passwordSubmit(){
 	}else{
 		flashMessage("Désolé... ce n'est pas la solution.","red");
 	}
+}
+
+function pathSucceeded(){
+	displayItemContent("Victoire",successContent);
 }

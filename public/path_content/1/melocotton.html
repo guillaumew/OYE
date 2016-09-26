@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OYE</title>
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<link rel="stylesheet" type="text/css" href="../../css/shared.css">
+</head>
+<body>
+<style type="text/css">
+	#close{
+		position: fixed;
+		top:0;
+		right: 0;
+	}
+	#choice #sauvage{
+		display: none;
+	}
+	#password{
+		display: none;
+	}
+	#choice div{
+	    display: block;
+	    border: solid 1px black;
+	    padding: 10px;
+	    text-align: center;
+	    font-size: 18px;
+        margin: 10px;
+	}
+</style>
+<div id="content">
+	<div id="choice">
+		<div id="offer">Parler du trésor de Jules Verne au serveur</div>
+		<div id="drink">Prendre une pinte de bière</div>
+		<div id="absinthe">Prendre un verre d'absinthe</div>
+		<div id="sauvage">Prendre un verre d'absinthe Sauvage</div>
+	</div>
+	<div id="password">
+		<p>Le barman vous demande le mot de passe :</p>
+		<input type="text" id="guess" placeholder="Votre mot de passe">
+		<input type="submit" name="Envoyer" id="submit">
+	</div>
+</div>
+
+<script type="text/javascript">
+	top.clearInterval(top.looking);
+	function changeContent (message){
+		document.getElementById("content").innerHTML = message;
+	}
+	document.getElementById("offer").addEventListener("click",function(){
+		changeContent("<p>Le serveur vous répond d'un air surpris :</p>\"Jules Verne ? Il n'a jamais été véritablement riche. Je doute qu'il ait laissé un trésor derrière lui.\"</p>");
+	});
+	document.getElementById("drink").addEventListener("click",function(){
+		changeContent("<p>Le barman te sert une bière bien fraiche. Tu la siroptes tranquillement sur la terrasse du bar.</p>");
+	});
+	document.getElementById("absinthe").addEventListener("click",function(){
+		changeContent("<p>Le choix d'absinthe est assez impressionnant dans ce bar. Tu te retrouve démuni quand le barman te demande la marque de ton choix.</p><p>Tu préfères sortir du bar.</p>");
+	});
+	if(top.checkIfObjectExists(4)){
+		document.getElementById("sauvage").style.display = "block";
+	}
+	document.getElementById("sauvage").addEventListener("click",function(){
+		document.getElementById("choice").style.display = "none" ;
+		document.getElementById("password").style.display = "block" ;
+	});
+	document.getElementById("submit").addEventListener("click",function(){
+		console.log()
+		if(document.getElementById("guess").value=="amiral"){
+			top.pathSucceeded();
+		}
+	})
+</script>
+</body>
+</html>
