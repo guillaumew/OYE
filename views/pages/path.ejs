@@ -2,6 +2,7 @@
 <html>
 <head>
 	<% include ../partials/header.ejs %>
+	<link rel="stylesheet" type="text/css" href="../css/path.css">
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk-e2vIralT717kd6wbv2_gpcSbGyByxM&callback=mapReady"
         async defer></script>
 </head>
@@ -17,8 +18,16 @@
 	<div id="main_content">
 		<img src="../img/close.png" id="close_content" onclick="closeContent();">
 		<div id="current_content">
-			<h4><%= path.name %></h4>
-			<div><%- path.init_content %></div>
+			<h4 id="content_title"><%= path.name %></h4>
+			<div id="content_description"><%- path.init_content %></div>
+			<div id="content_media"></div>
+			<div id="content_password">
+				<p>Tu as trouvé la solution ?</p>
+				<p style="padding-left: 1px;text-align: center;">
+					<input type="text" id="password_input">
+					<input type="submit" value="Envoyer" placeholder="Mot de passe" onclick="passwordSubmit()">
+				</p>
+			</div>
 		</div>
 	</div>
 	<script type="text/javascript">

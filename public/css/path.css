@@ -99,9 +99,13 @@ h4{
 	margin-bottom: 20px;
 }
 
-#current_content p, #current_content a{
+#current_media, #content_description, #current_content p, #current_content a {
 	font-size: 20px;
     margin: 10px;
+}
+
+#content_password{
+	display: none;
 }
 
 #objects_container{

@@ -2,6 +2,27 @@ var places = [];
 var check_position_available = true;
 var map;
 var myPosition;
+var current_item;
+function toggleFullScreen() {
+  if (!document.fullscreenElement &&    // alternative standard method
+      !document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+      document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+      document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+    }
+  } else {
+    if (document.cancelFullScreen) {
+      document.cancelFullScreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitCancelFullScreen) {
+      document.webkitCancelFullScreen();
+    }
+  }
+}
 
 function mapReady(){
 	if(path_lat && path_long)
@@ -141,13 +162,19 @@ function displayObject(client_id){
 	displayItem(objects[client_id]);
 }
 
+function itemSuccess(item) {
+	displayItemContent(item.name,item.success_content, item.success_content_type, "../"+item.success_media, null);
+	itemUnlocks(item.objects_on_success, item.places_on_success);
+}
+
 function displayItem(item){
 	
 	itemUnlocks(item.objects_on_open,item.places_on_open);
 
+	current_item = item;
+
 	if(item.success_condition === "object" && checkIfObjectExists(item.success_key)){
-		displayItemContent(item.name,item.success_content, item.success_content_type, "../"+item.success_media, null);
-		itemUnlocks(item.objects_on_success, item.places_on_success);
+		itemSuccess(item);
 	}else{
 		if(item.success_condition === 'password'){
 			displayItemContent(item.name,item.content, item.content_type, "../"+item.media,item.success_key);
@@ -175,43 +202,36 @@ function itemUnlocks(stringObj,stringPla){
 }
 
 function displayItemContent(name,caption,media_type,media_url, password){
+	document.getElementById("content_title").innerHTML = name;
+	document.getElementById("content_description").innerHTML = caption;
 
-	var container = document.getElementById("current_content");
-	container.innerHTML = "";
-	document.getElementById("main_content").style.display ="block";
-	var title = document.createElement("h4");
-	title.innerHTML = name;
-	container.appendChild(title);
+	var media_container = document.getElementById("content_media");
+	media_container.innerHTML = "";
 
 	switch (media_type){
 		case "img":
-			caption_el = document.createElement("p");
-			caption_el.innerHTML = caption;
-			container.appendChild(caption_el);
 
 			media = document.createElement(media_type);
 			media.src = "../" + media_url;
-			container.appendChild(media);
+			media_container.appendChild(media);
 
 			a = document.createElement("a");
 			a.href= "../" + media_url;
 			a.innerHTML = "Voir le media dans un nouveau tab";
 			a.target = "_new";
-			container.appendChild(a);
+			media_container.appendChild(a);
 
 			break;
-		default:
-			var description = document.createElement("div");
-			description.innerHTML = caption;
-			container.appendChild(description);
+	}
 
-	}
+	var password_container = document.getElementById("content_password");
 	if(password){
-		var input = document.createElement("input");
-		input.type = "text";
-		input.placeholder = "not yet implemented";
-		container.appendChild(input);
+		document.getElementById("password_input").setAttribute("psw",password);
+		password_container.style.display="block";
+	}else{
+		password_container.style.display="none";
 	}
+	document.getElementById("main_content").style.display = "block";
 }
 
 function showObject(id){
@@ -223,5 +243,15 @@ function giveObjects(id){
 	if(!objects[client_id].is_visible){
 		showObject(id);
 		objects[client_id].is_visible = true;
+	}
+}
+
+function passwordSubmit(){
+	var password_input = document.getElementById("password_input");
+	if(password_input.getAttribute("psw") === password_input.value){
+		flashMessage("success");
+		itemSuccess(current_item);
+	}else{
+		flashMessage("perdu");
 	}
 }
