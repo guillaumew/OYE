@@ -44,6 +44,10 @@ function updateMap(pos){
 		});		
 	}
 
+	if(myPosition){
+		myPosition.setMap(null);
+	}
+
 	myPosition = new google.maps.Marker({
 		map: map,
 		position: pos,
@@ -134,8 +138,11 @@ function getPlace(id, callback){
 	req.open('GET', '/getPlace/'+id, true);
 	req.onreadystatechange = function (aEvt) {
 		if (req.readyState == 4) {
-			if(req.status == 200)
+			if(req.status == 200){
 				callback(JSON.parse(req.responseText));
+			}else{
+				flashMessage("Erreur lors de ala récupération du lieu suivant.", "red");
+			}
 		}
 	};
 	req.send(null);
