@@ -4,27 +4,6 @@ var map;
 var myPosition;
 var current_item;
 
-function toggleFullScreen() {
-  if (!document.fullscreenElement &&    // alternative standard method
-      !document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods
-    if (document.documentElement.requestFullscreen) {
-      document.documentElement.requestFullscreen();
-    } else if (document.documentElement.mozRequestFullScreen) {
-      document.documentElement.mozRequestFullScreen();
-    } else if (document.documentElement.webkitRequestFullscreen) {
-      document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-    }
-  } else {
-    if (document.cancelFullScreen) {
-      document.cancelFullScreen();
-    } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen();
-    } else if (document.webkitCancelFullScreen) {
-      document.webkitCancelFullScreen();
-    }
-  }
-}
-
 function mapReady(){
 	if(path_lat && path_long)
 	map = new google.maps.Map(document.getElementById('map'), {
@@ -55,18 +34,6 @@ function updateMap(pos){
 	});
 	myPosition.setMap(map);
 	map.setCenter(pos);
-}
-
-function hideflash(){
-	document.getElementById("flash_message").style.display ="none";
-}
-
-function flashMessage(message,color){
-	flash_el = document.getElementById("flash_message");
-	flash_el.innerHTML = message;
-	flash_el.style.background = color;
-	flash_el.style.display = "block";
-	setTimeout(hideflash,2000);
 }
 
 function computeDistance(coords1,coords2){

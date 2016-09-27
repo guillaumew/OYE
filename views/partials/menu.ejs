@@ -1,0 +1,58 @@
+<div id="flash_message"></div>
+<div id="menu">
+<div id="menu_button" onclick="toggleMenu()">
+	</div>
+	<div id="menu_content">
+		<a href="/"><h3> Open Your Eyes</h3>
+		<hr>
+		<p onclick="toggleFullScreen()">Mode plein écran</p>
+		<a href="http://twitter.com/geeyom" target="_new"><p>Contact</p></a>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var isMenuOpen = false;
+	function toggleMenu() {
+		var menu_el = document.getElementById("menu");
+		if(isMenuOpen){
+			menu.style.left = "-250px";
+			isMenuOpen = false;
+		}else{
+			menu.style.left = "0";
+			isMenuOpen = true;
+		}
+	}
+
+	function toggleFullScreen() {
+	  if (!document.fullscreenElement &&    // alternative standard method
+	      !document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods
+	    if (document.documentElement.requestFullscreen) {
+	      document.documentElement.requestFullscreen();
+	    } else if (document.documentElement.mozRequestFullScreen) {
+	      document.documentElement.mozRequestFullScreen();
+	    } else if (document.documentElement.webkitRequestFullscreen) {
+	      document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+	    }
+	  } else {
+	    if (document.cancelFullScreen) {
+	      document.cancelFullScreen();
+	    } else if (document.mozCancelFullScreen) {
+	      document.mozCancelFullScreen();
+	    } else if (document.webkitCancelFullScreen) {
+	      document.webkitCancelFullScreen();
+	    }
+	  }
+	}
+
+	function hideflash(){
+		document.getElementById("flash_message").style.display ="none";
+	}
+
+	function flashMessage(message,color){
+		flash_el = document.getElementById("flash_message");
+		flash_el.innerHTML = message;
+		flash_el.style.background = color;
+		flash_el.style.display = "block";
+		setTimeout(hideflash,2000);
+	}
+</script>

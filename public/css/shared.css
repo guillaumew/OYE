@@ -17,6 +17,10 @@ h4{
     font-family: "multicolore", Helvetica, Arial, sans-serif;
     text-align: center;
 }
+h3{
+    font-family: "multicolore", Helvetica, Arial, sans-serif;
+    text-align: center;
+}
 
 input[type=text] {
 	padding:5px; 
@@ -60,4 +64,44 @@ input[type=submit] {
 }
 .inline{
     display: inline-block;
+}
+
+#menu{
+    position: fixed;
+    left:-250px;
+    top:0;
+    bottom: 0;
+    width:250px;
+    background-color: #121326;
+    color: #FFFFFF;
+    z-index: 50;
+    -webkit-transition: left 1s;
+    transition: left 1s;
+}
+
+#menu_button{
+    width: 50px;
+    height: 50px;
+    background: url(../img/menu_button.png);
+    background-size: contain;
+    position: absolute;
+    top: 0;
+    right: -50px;
+    background-color: rgba(255,255,255,0.5);
+}
+#menu_content{
+    padding: 15px;
+    font-size: 20px;
+}
+
+#menu_content a{
+    text-decoration: none;
+    color:#FFFFFF;
+}
+
+#menu_content p{
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: rgba(255,255,255,0.1);
+    padding: 5px;
 }

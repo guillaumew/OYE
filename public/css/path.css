@@ -1,20 +1,11 @@
 
 #header{
 	height: 75px;
-	display: inline-block;
+	left: 50px;
+    right: 50px;
+    position: absolute;
 }
-#header_title{
-	width:250px;
-	display: inherit;
-}
-#fullscreen{
-	background: url(../img/fullscreen.png);
-    width: 40px;
-    height: 40px;
-    display: inherit;
-    background-size: contain;
-    margin: 10px;
-}
+
 #main_frame{
 	position: fixed;
 	width: 100%;
