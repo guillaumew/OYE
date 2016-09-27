@@ -97,7 +97,7 @@ function displayPlace(client_id){
 function checkPlaceReached(position){
 	for(var i=0;i<places.length;i++){
 		var dist = computeDistance (position,places[i]);
-		if(dist < 0.02){
+		if(dist < places[i].accuracy/1000){
 			displayPlace(i);
 		}
 	}
