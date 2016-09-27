@@ -3,8 +3,6 @@
 <head>
 	<% include ../partials/header.ejs %>
 	<link rel="stylesheet" type="text/css" href="../css/path.css">
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk-e2vIralT717kd6wbv2_gpcSbGyByxM&callback=mapReady"
-        async defer></script>
 </head>
 
 <body>
@@ -78,8 +76,11 @@
 
 		var path_lat = <%- path.latitude %>;
 		var path_long = <%- path.longitude %>;
+
 	</script>
 	<script type="text/javascript" src="../scripts/path.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk-e2vIralT717kd6wbv2_gpcSbGyByxM&callback=mapReady"
+        async defer></script>
 	<script type="text/javascript">
 		var initial_place = "<%- path.open_places %>";
 		if(initial_place.length > 0){

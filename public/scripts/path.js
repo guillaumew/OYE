@@ -279,6 +279,10 @@ function showObject(id, client_id){
 }
 
 function giveObjects(id, orig){
+	if(id<0){
+		pathSucceeded();
+		return;
+	}
 	var client_id = getObjectClientId(id);
 	if(!objects[client_id].is_visible){
 		objects[client_id].is_visible = true;
