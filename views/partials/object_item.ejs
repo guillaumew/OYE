@@ -1,6 +1,9 @@
 
 <div class="object" object_id="<%= obj.id %>" onclick="displayObject(<%= object_client_id %>);">
 	<img src="../<%= obj.thumb %>">
-	<span><%= obj.name %></span>
+	<span class="object_title"><%= obj.name %></span>
+	<% if (obj.occurence > 1){ %>
+	<div class="object_occurence"><span class="occurence"></span>/<%= obj.occurence %></div>
+	<% } %>
 </div>
 <% object_client_id++ %>

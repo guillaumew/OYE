@@ -64,6 +64,8 @@
 							current_obj.is_visible = true ;
 							document.querySelector(".object[object_id='"+current_obj.id+"']").style.display = "inherit";
 						}
+						current_obj.foundin = [];
+						current_obj.type = "o";
 						objects.push(current_obj);
 					</script>
 			<% }); %>

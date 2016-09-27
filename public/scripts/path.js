@@ -129,6 +129,7 @@ function checkPosition(){
 
 function addPlaceToList(place){
 	if(true){
+		place.type = "p";
 		places.push(place);
 	}
 }
@@ -189,17 +190,18 @@ function displayObject(client_id){
 
 function itemSuccess(item) {
 	displayItemContent(item.name,item.success_content, item.success_content_type, "../"+item.success_media, null);
-	itemUnlocks(item.objects_on_success, item.places_on_success);
+	itemUnlocks(item.objects_on_success, item.places_on_success, item.type +"-"+ item.id);
 }
 
 function displayItem(item){
 	
-	itemUnlocks(item.objects_on_open,item.places_on_open);
-
+	itemUnlocks(item.objects_on_open,item.places_on_open, item.type +"-"+ item.id);
 	current_item = item;
 
 	if(item.success_condition === "object" && checkIfObjectExists(item.success_key)){
 		itemSuccess(item);
+	}else if(item.success_condition === "occurence" && item.occurence == item.foundin.length){
+		itemSuccess(item);		
 	}else{
 		if(item.success_condition === 'password'){
 			displayItemContent(item.name,item.content, item.content_type, "../"+item.media,item.success_key);
@@ -210,11 +212,11 @@ function displayItem(item){
 
 }
 
-function itemUnlocks(stringObj,stringPla){
+function itemUnlocks(stringObj,stringPla,orig){
 	if(stringObj){
 		var objectsToGive = stringObj.split(",");
 		for(var i=0;i<objectsToGive.length;i++){
-			giveObjects(objectsToGive[i]);
+			giveObjects(objectsToGive[i],orig);
 		}
 	}
 
@@ -268,16 +270,23 @@ function displayItemContent(name,caption,media_type,media_url, password){
 	document.getElementById("main_content").style.display = "block";
 }
 
-function showObject(id){
+function showObject(id, client_id){
 	document.querySelector(".object[object_id='"+ id +"']").style.display = "inherit";
+	var occ_el= document.querySelector(".object[object_id='"+ id +"'] .occurence");
+	if(occ_el){
+		occ_el.innerHTML = objects[client_id].foundin.length;
+	}
 }
 
-function giveObjects(id){
+function giveObjects(id, orig){
 	var client_id = getObjectClientId(id);
 	if(!objects[client_id].is_visible){
-		showObject(id);
 		objects[client_id].is_visible = true;
 	}
+	if(objects[client_id].foundin.indexOf(orig)<0){
+		objects[client_id].foundin.push(orig);
+	}
+	showObject(id, client_id);
 }
 
 function passwordSubmit(){
