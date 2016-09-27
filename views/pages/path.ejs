@@ -35,7 +35,8 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		var successContent = "<%- path.win_content %>"
+		var successContent = "<%- path.win_content %>";
+		var path_id = "<%- path.id %>";
 
 		var objects = [];
 		var initial_objects = [];
@@ -78,9 +79,6 @@
 		var path_long = <%- path.longitude %>;
 
 	</script>
-	<script type="text/javascript" src="../scripts/path.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk-e2vIralT717kd6wbv2_gpcSbGyByxM&callback=mapReady"
-        async defer></script>
 	<script type="text/javascript">
 		var initial_place = "<%- path.open_places %>";
 		if(initial_place.length > 0){
@@ -90,5 +88,8 @@
 			}
 		}
 	</script>
+	<script type="text/javascript" src="../scripts/path.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk-e2vIralT717kd6wbv2_gpcSbGyByxM&callback=mapReady"
+        async defer></script>
 </body>
 </html>

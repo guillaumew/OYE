@@ -128,10 +128,9 @@ function checkPosition(){
 }
 
 function addPlaceToList(place){
-	if(true){
-		place.type = "p";
-		places.push(place);
-	}
+	place.type = "p";
+	places.push(place);
+	saveProgress();
 }
 
 function getPlace(id, callback){
@@ -229,6 +228,7 @@ function itemUnlocks(stringObj,stringPla,orig){
 }
 
 function displayItemContent(name,caption,media_type,media_url, password){
+
 	document.getElementById("content_title").innerHTML = name;
 	document.getElementById("content_description").innerHTML = caption;
 
@@ -287,10 +287,11 @@ function giveObjects(id, orig){
 	if(!objects[client_id].is_visible){
 		objects[client_id].is_visible = true;
 	}
-	if(objects[client_id].foundin.indexOf(orig)<0){
+	if(orig && objects[client_id].foundin.indexOf(orig)<0){
 		objects[client_id].foundin.push(orig);
 	}
 	showObject(id, client_id);
+	saveProgress();
 }
 
 function passwordSubmit(){
@@ -306,3 +307,41 @@ function passwordSubmit(){
 function pathSucceeded(){
 	displayItemContent("Victoire",successContent);
 }
+
+function getCookie(name) {
+  var value = "; " + document.cookie;
+  var parts = value.split("; " + name + "=");
+  if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
+function saveProgress(){
+	try{
+		document.cookie = "places_"+path_id+"="+JSON.stringify(places);
+		document.cookie = "objects_"+path_id+"="+JSON.stringify(objects);
+	}catch(e){
+		flashMessage(e,"red");
+	}
+}
+
+function loadProgress(){
+	try{
+		var cookiePlaces = getCookie("places_"+path_id);
+		var cookieObjects = getCookie("objects_"+path_id);
+
+		if(cookiePlaces){
+			places = JSON.parse(cookiePlaces);
+		}
+		if(cookieObjects){
+			objects = JSON.parse(cookieObjects);
+			for(var i=0;i<objects.length;i++){
+				if(objects[i].is_visible>0){
+					giveObjects(objects[i].id);
+				}
+			}
+		}
+	}catch(e){
+		flashMessage(e,"red");
+	}
+}
+
+loadProgress();

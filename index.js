@@ -33,7 +33,7 @@ app.get('/', function(request, response) {
 });
 
 app.get('/path/:pageid', function(request,response){
-	connection.query('SELECT name, init_content, win_content, give_objects, open_places, latitude, longitude from Paths where id='+request.params.pageid, function(err1, path, fields) {
+	connection.query('SELECT id, name, init_content, win_content, give_objects, open_places, latitude, longitude from Paths where id='+request.params.pageid, function(err1, path, fields) {
 		if (!err1) {
 			if(path.length > 0){
 				connection.query('SELECT * from Objects where path_id='+request.params.pageid, function(err2, objects, fields) {
