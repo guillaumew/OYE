@@ -290,6 +290,12 @@ function saveProgress(){
 	}
 }
 
+function deleteProgress(){
+	document.cookie = "places_"+path_id + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+	document.cookie = "objects_"+path_id + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+	document.location.reload(true);
+}
+
 function loadProgress(){
 	try{
 		var cookiePlaces = getCookie("places_"+path_id);
@@ -311,4 +317,17 @@ function loadProgress(){
 	}
 }
 
+
+function updateMenu() {
+	var container = document.getElementById("menu_path");
+	var p_el = document.createElement("p");
+	p_el.innerHTML = "Effacer progression";
+	p_el.setAttribute("onclick", "deleteProgress()");
+	container.appendChild(p_el);
+	container.style.display = "block";
+	document.querySelector("#menu_path .menu_sub").innerHTML = path_name;
+}
+
+
 loadProgress();
+updateMenu();
