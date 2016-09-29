@@ -4,6 +4,21 @@ var map;
 var myPosition;
 var current_item;
 
+function closeContent(){
+	document.getElementById('main_content').style.top = "110%";
+}
+
+function openContent(){
+	var content_el = document.getElementById('main_content');
+	content_el.scrollTop;
+	if(content_el.style.top == "30px"){
+		closeContent();
+		setTimeout(openContent,400);
+	}else{
+		document.getElementById('main_content').style.top = "30px";
+	}
+}
+
 function mapReady(){
 	if(path_lat && path_long)
 	map = new google.maps.Map(document.getElementById('map'), {
@@ -234,11 +249,24 @@ function displayItemContent(name,caption,media_type,media_url, password){
 	}else{
 		password_container.style.display="none";
 	}
-	document.getElementById("main_content").style.display = "block";
+	openContent();
+}
+
+function newObjectEffect(id){
+	var list = document.getElementById("objects_list");
+	list.style.backgroundColor = "white";
+	setTimeout(function(){
+		list.style.backgroundColor = "#121326";
+	},250);
+	
+	document.querySelector(".object[object_id='"+ id +"']").style.display = "inherit";
+	setTimeout(function(){
+		document.querySelector(".object[object_id='"+ id +"']").style.width = "75px";
+	},100);
 }
 
 function showObject(id, client_id){
-	document.querySelector(".object[object_id='"+ id +"']").style.display = "inherit";
+	newObjectEffect(id);
 	var occ_el= document.querySelector(".object[object_id='"+ id +"'] .occurence");
 	if(occ_el){
 		occ_el.innerHTML = objects[client_id].foundin.length;

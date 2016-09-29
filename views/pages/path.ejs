@@ -18,7 +18,7 @@
 		</div>
 		<div id="map"></div>
 	</div>
-	<div id="main_content">
+	<div id="main_content" style="top:30px;">
 		<img src="../img/close.png" id="close_content" onclick="closeContent();">
 		<div id="current_content">
 			<h4 id="content_title"><%= path.name %></h4>
@@ -61,6 +61,7 @@
 						current_obj.is_visible = false ;
 						if(initial_objects.indexOf(current_obj.id.toString())!=-1){
 							current_obj.is_visible = true ;
+							document.querySelector(".object[object_id='"+current_obj.id+"']").style.width = "75px";
 							document.querySelector(".object[object_id='"+current_obj.id+"']").style.display = "inherit";
 						}
 						current_obj.foundin = [];
@@ -71,10 +72,6 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		function closeContent(){
-			document.getElementById("main_content").style.display ="none";
-		}
-
 		var path_lat = <%- path.latitude %>;
 		var path_long = <%- path.longitude %>;
 
