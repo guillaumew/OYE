@@ -10,7 +10,7 @@ function closeContent(){
 
 function openContent(){
 	var content_el = document.getElementById('main_content');
-	content_el.scrollTop;
+	document.getElementById("current_content").scrollTop = 0;
 	if(content_el.style.top == "30px"){
 		closeContent();
 		setTimeout(openContent,400);
@@ -73,7 +73,7 @@ function addMarkerToMap(lat,long){
 
 function displayPlace(client_id){
 	displayItem(places[client_id]);
-	addMarkerToMap(places[client_id].latitude,places[client_id].longitude)
+	addMarkerToMap(places[client_id].latitude,places[client_id].longitude);
 }
 
 function checkPlaceReached(position){
@@ -82,6 +82,13 @@ function checkPlaceReached(position){
 		if(dist < places[i].accuracy/1000){
 			displayPlace(i);
 		}
+	}
+}
+
+function revealAllPlaces(){
+	toggleMenu();
+	for(var i=0;i<places.length;i++){
+		addMarkerToMap(places[i].latitude,places[i].longitude);
 	}
 }
 
@@ -303,31 +310,45 @@ function pathSucceeded(){
 	displayItemContent("Victoire",successContent);
 }
 
+// to be deleted
 function getCookie(name) {
   var value = "; " + document.cookie;
   var parts = value.split("; " + name + "=");
   if (parts.length == 2) return parts.pop().split(";").shift();
 }
+// to be deleted
+
+function createCookie(name,value,days) {
+    localStorage.setItem(name,value);
+}
+
+function readCookie(name) {
+    return localStorage.getItem(name);
+}
+
+function eraseCookie(name) {
+    localStorage.removeItem(name);
+}
 
 function saveProgress(){
 	try{
-		document.cookie = "places_"+path_id+"="+JSON.stringify(places);
-		document.cookie = "objects_"+path_id+"="+JSON.stringify(objects);
+		createCookie("places_"+path_id, JSON.stringify(places), 5);
+		createCookie("objects_"+path_id, JSON.stringify(objects), 5);
 	}catch(e){
 		flashMessage(e,"red");
 	}
 }
 
 function deleteProgress(){
-	document.cookie = "places_"+path_id + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-	document.cookie = "objects_"+path_id + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+	eraseCookie("places_"+path_id);
+	eraseCookie("objects_"+path_id);
 	document.location.reload(true);
 }
 
 function loadProgress(){
 	try{
-		var cookiePlaces = getCookie("places_"+path_id);
-		var cookieObjects = getCookie("objects_"+path_id);
+		var cookiePlaces = readCookie("places_"+path_id);
+		var cookieObjects = readCookie("objects_"+path_id);
 
 		if(cookiePlaces){
 			places = JSON.parse(cookiePlaces);
@@ -348,12 +369,20 @@ function loadProgress(){
 
 function updateMenu() {
 	var container = document.getElementById("menu_path");
-	var p_el = document.createElement("p");
-	p_el.innerHTML = "Effacer progression";
-	p_el.setAttribute("onclick", "deleteProgress()");
-	container.appendChild(p_el);
+
+	var p_el1 = document.createElement("p");
+	p_el1.innerHTML = "Effacer progression";
+	p_el1.setAttribute("onclick", "deleteProgress()");
+	container.appendChild(p_el1);
+
+	var p_el2 = document.createElement("p");
+	p_el2.innerHTML = "Lieux avec indices";
+	p_el2.setAttribute("onclick", "revealAllPlaces()");
+	container.appendChild(p_el2);
+
 	container.style.display = "block";
 	document.querySelector("#menu_path .menu_sub").innerHTML = path_name;
+
 }
 
 

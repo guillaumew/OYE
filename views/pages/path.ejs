@@ -7,17 +7,19 @@
 
 <body>
 	<% include ../partials/menu.ejs %>
-	<div id="header">
-		<div id="header_title">
-			<h1><%= path.name %></h1>
+	<div id="help">Help</div>
+	<div id="fixed_content">
+		<div id="header">
+			<div id="header_title">
+				<h1><%= path.name %></h1>
+			</div>
 		</div>
-	</div>
-	<div id="main_frame">
 		<div id="position">
 			<div id="postion_update" onclick="checkPosition()"><span id="position_content">Vérifier ma position</span></div>
 		</div>
 		<div id="map"></div>
 	</div>
+
 	<div id="main_content" style="top:30px;">
 		<img src="../img/close.png" id="close_content" onclick="closeContent();">
 		<div id="current_content">

@@ -1,3 +1,6 @@
+body{
+	overflow: hidden;
+}
 
 #header{
 	height: 75px;
@@ -6,43 +9,47 @@
     position: absolute;
 }
 
-#main_frame{
+#fixed_content{
 	position: fixed;
 	width: 100%;
-	top:75px;
+	top:0px;
 	bottom: 90px;
-	overflow-x: scroll;
+	overflow: hidden;
 }
 #position{
 	width: 100%;
 	text-align: center;
-	height: 150px;
+	height: 100px;
+	position: absolute;
+	top:75px;
 }
 
 #postion_update{
 	text-align: center;
     background-color: #121326;
-    width: 150px;
-    height: 150px;
-    border-radius: 75px;
+    width: 100PX;
+    height: 100px;
+    border-radius: 50px;
     position: absolute;
     left: 50%;
-    margin-left: -75px;
+    margin-left: -50px;
 }
 
 #position_content{
 	font-family: "multicolore", Helvetica, Arial, sans-serif;
 	position: absolute;
-    width: 140px;
     color: white;
-    font-size: 18px;
-    left: 6px;
-    top: 62px;
+    font-size: 16px;
+    left: 0;
+    top: 30px;
+    right: 0;
 }
 
 #map{
 	margin-top: 20px;
-	height: 350px;
+	position: absolute!important;
+	top:175px;
+	bottom:0;
 	left: 5%;
     width: 90%;
 }
