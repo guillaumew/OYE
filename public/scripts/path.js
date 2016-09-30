@@ -73,7 +73,6 @@ function addMarkerToMap(lat,long){
 
 function displayPlace(client_id){
 	displayItem(places[client_id]);
-	addMarkerToMap(places[client_id].latitude,places[client_id].longitude);
 }
 
 function checkPlaceReached(position){
@@ -86,10 +85,14 @@ function checkPlaceReached(position){
 }
 
 function revealAllPlaces(){
-	toggleMenu();
-	for(var i=0;i<places.length;i++){
-		addMarkerToMap(places[i].latitude,places[i].longitude);
+	if(window.map && map.getCenter){
+		for(var i=0;i<places.length;i++){
+			addMarkerToMap(places[i].latitude,places[i].longitude);
+		}	
+	}else{
+		setTimeout(revealAllPlaces,200);
 	}
+
 }
 
 function checkPosition(){
@@ -119,6 +122,7 @@ function checkPosition(){
 function addPlaceToList(place){
 	place.type = "p";
 	places.push(place);
+	addMarkerToMap(place.latitude,place.longitude);
 	saveProgress();
 }
 
@@ -352,6 +356,7 @@ function loadProgress(){
 
 		if(cookiePlaces){
 			places = JSON.parse(cookiePlaces);
+			revealAllPlaces();
 		}
 		if(cookieObjects){
 			objects = JSON.parse(cookieObjects);
@@ -375,16 +380,10 @@ function updateMenu() {
 	p_el1.setAttribute("onclick", "deleteProgress()");
 	container.appendChild(p_el1);
 
-	var p_el2 = document.createElement("p");
-	p_el2.innerHTML = "Lieux avec indices";
-	p_el2.setAttribute("onclick", "revealAllPlaces()");
-	container.appendChild(p_el2);
-
 	container.style.display = "block";
 	document.querySelector("#menu_path .menu_sub").innerHTML = path_name;
 
 }
 
-
-loadProgress();
 updateMenu();
+loadProgress();
