@@ -10,13 +10,11 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 function requireHTTPS(req, res, next) {
-    if (!req.secure && req.get('host').indexOf("localhost")==-1) {
+    if (!req.secure) {
         return res.redirect('https://' + req.get('host') + req.url);
     }
     next();
 }
-
-app.use(requireHTTPS);
 
 var connection = mysql.createConnection({
   host     : process.env.DATABASE_HOST,
@@ -93,6 +91,8 @@ app.get('/getPlace/:Placeid', function(request,response){
 		}
 	});
 });
+
+app.use(requireHTTPS);
 
 app.listen(app.get('port'), function() {
 	console.log('Node app is running on port', app.get('port'));
