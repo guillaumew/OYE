@@ -4,7 +4,10 @@ var map;
 var myPosition;
 var current_item;
 
-function closeContent(){
+function closeContent(delete_media=true){
+	if(delete_media){
+		document.getElementById("content_media").innerHTML = "";
+	}
 	document.getElementById('main_content').style.top = "110%";
 }
 
@@ -12,7 +15,7 @@ function openContent(){
 	var content_el = document.getElementById('main_content');
 	document.getElementById("current_content").scrollTop = 0;
 	if(content_el.style.top == "30px"){
-		closeContent();
+		closeContent(false);
 		setTimeout(openContent,400);
 	}else{
 		document.getElementById('main_content').style.top = "30px";
@@ -187,8 +190,10 @@ function displayObject(client_id){
 }
 
 function itemSuccess(item) {
-	displayItemContent(item.name,item.success_content, item.success_content_type, "../"+item.success_media, null);
+	item.is_succeeded = true;
+	displayItemContent(item.name,item.success_content, item.success_content_type, item.success_media, null);
 	itemUnlocks(item.objects_on_success, item.places_on_success, item.type +"-"+ item.id);
+	saveProgress();
 }
 
 function displayItem(item){
@@ -202,9 +207,13 @@ function displayItem(item){
 		itemSuccess(item);		
 	}else{
 		if(item.success_condition === 'password'){
-			displayItemContent(item.name,item.content, item.content_type, "../"+item.media,item.success_key);
+			if(!item.is_succeeded){
+				displayItemContent(item.name,item.content, item.content_type, item.media,item.success_key);
+			}else{
+				displayItemContent(item.name,item.success_content, item.success_content_type, item.success_media, null);
+			}
 		}else{
-			displayItemContent(item.name,item.content, item.content_type, "../"+item.media);
+			displayItemContent(item.name,item.content, item.content_type, item.media);
 		}
 	}
 
@@ -253,10 +262,17 @@ function displayItemContent(name,caption,media_type,media_url, password){
 
 		case "youtube":
 
-			var youtube = document.createElement(media_type);
-			media.src = "https://www.youtube.com/embed/" + media_url;
-			media.setAttribute("allowfullscreen");
+			var media = document.createElement("iframe");
+			media.src = "https://www.youtube.com/embed/"+media_url;
+			media.setAttribute("allowfullscreen",null);
 			media_container.appendChild(media);
+
+			var a = document.createElement("a");
+			a.href= "https://www.youtube.com/watch?v=" + media_url;
+			a.innerHTML = "Voir le media dans un nouveau tab";
+			a.target = "_new";
+			media_container.appendChild(a);
+
 			break;
 
 		case "iframe":

@@ -9,7 +9,14 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-console.log(process.env.DATABASE_HOST);
+function requireHTTPS(req, res, next) {
+    if (!req.secure && req.get('host').indexOf("localhost")==-1) {
+        return res.redirect('https://' + req.get('host') + req.url);
+    }
+    next();
+}
+
+app.use(requireHTTPS);
 
 var connection = mysql.createConnection({
   host     : process.env.DATABASE_HOST,
