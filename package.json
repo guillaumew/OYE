@@ -9,7 +9,8 @@
     "mysql": "^2.5.4",
     "ejs": "^2.5.2",
     "db-migrate" : "0.10.0-beta.16",
-    "db-migrate-mysql" : "1.1.7"
+    "db-migrate-mysql" : "1.1.7",
+    "express-sslify" : "1.1.0"
   },
   "main": "index.js",
   "scripts": {

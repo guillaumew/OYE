@@ -1,6 +1,7 @@
 var mysql      = require('mysql');
 var express = require('express');
 var app = express();
+var enforce = require('express-sslify');
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -9,11 +10,8 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-function requireHTTPS(req, res, next) {
-    if (!req.secure) {
-        return res.redirect('https://' + req.get('host') + req.url);
-    }
-    next();
+if( app.get('env') != "development"){
+	app.use(enforce.HTTPS({ trustProtoHeader: true }));
 }
 
 var connection = mysql.createConnection({
@@ -91,8 +89,6 @@ app.get('/getPlace/:Placeid', function(request,response){
 		}
 	});
 });
-
-app.use(requireHTTPS);
 
 app.listen(app.get('port'), function() {
 	console.log('Node app is running on port', app.get('port'));
