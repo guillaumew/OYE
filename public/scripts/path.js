@@ -61,14 +61,20 @@ function computeDistance(coords1,coords2){
 }
 
 function addMarkerToMap(lat,long){
-	var position = new google.maps.LatLng(lat,long);
-	var iPlace = new google.maps.Marker({
-		map: map,
-		position: position,
-		title: "Lieu d'intérêt",
-		icon: "../img/grey_pin.png"
-	});
-	iPlace.setMap(map);
+	if(map){
+		var position = new google.maps.LatLng(lat,long);
+		var iPlace = new google.maps.Marker({
+			map: map,
+			position: position,
+			title: "Lieu d'intérêt",
+			icon: "../img/grey_pin.png"
+		});
+		iPlace.setMap(map);
+	} else {
+		setTimeout(function(){
+			addMarkerToMap(lat,long);
+		},500);
+	}
 }
 
 function displayPlace(client_id){
@@ -233,20 +239,28 @@ function displayItemContent(name,caption,media_type,media_url, password){
 		case "audio":
 		case "video":
 
-			media = document.createElement(media_type);
+			var media = document.createElement(media_type);
 			media.src = "../" + media_url;
 			media_container.appendChild(media);
 
-			a = document.createElement("a");
+			var a = document.createElement("a");
 			a.href= "../" + media_url;
 			a.innerHTML = "Voir le media dans un nouveau tab";
 			a.target = "_new";
 			media_container.appendChild(a);
 
 			break;
-			
+
+		case "youtube":
+
+			var youtube = document.createElement(media_type);
+			media.src = "https://www.youtube.com/embed/" + media_url;
+			media.setAttribute("allowfullscreen");
+			media_container.appendChild(media);
+			break;
+
 		case "iframe":
-			media = document.createElement(media_type);
+			var media = document.createElement(media_type);
 			media.src = "../" + media_url;
 			media_container.appendChild(media);
 			break; 
@@ -302,7 +316,7 @@ function giveObjects(id, orig){
 
 function passwordSubmit(){
 	var password_input = document.getElementById("password_input");
-	if(password_input.getAttribute("psw") === password_input.value){
+	if(password_input.getAttribute("psw") === password_input.value.toLowerCase()){
 		flashMessage("Bien joué ! C'est la bonne réponse.", "green");
 		itemSuccess(current_item);
 	}else{
