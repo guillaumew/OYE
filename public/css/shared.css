@@ -110,3 +110,17 @@ input[type=submit] {
 #menu_path{
     display: none;
 }
+
+.tourisme{
+    background-color: #F6E3CE;
+    border: solid 1px #F7BE81;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: justify;
+}
+.quote{
+    background: url(../img/quote.png);
+    background-repeat: no-repeat;
+    background-color: #EEE;
+    border-radius: 10px;
+}
