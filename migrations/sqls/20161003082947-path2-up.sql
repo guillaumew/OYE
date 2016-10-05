@@ -6,8 +6,7 @@ SET
 	name = "Cambriolage au musée",
 	thumb = "img/2/mhn.jpg",
 	init_content = "A tous les detectives en herbes : il y a eu un cambriolage au muséum d\'histoire naturelle. La police ne dispose pas de suffisemment de ressources pour mener à bien cette enquête. Si le dossier vous intéresse, rendez-vous sur la place de la monnaie.",
-	win_content = "Youpi !",
-	give_objects = "7",
+	win_content = "Vous avez retrouvé le dragon. Bravo ! C\'est gagné :)",
 	open_places = "8",
 	latitude = 47.214901,
 	longitude = -1.553836,
@@ -21,6 +20,7 @@ SET
 	latitude = 47.213188,
 	longitude = -1.565203,
 	path_id = 2,
+	objects_on_open = "7",
 	places_on_open = "9",
 	content = '<p class=\"quote\">\"C\'est affreux\", soupire le directeur du musée.\"Les scélérats ont volé de nombreux spécimens exposés. Je ne sais pas si nous pourrons les retrouver. Vous devez nous aider ! \"</p>
 	<p>Le directeur te fournit la liste des espèces à retrouver. Il va falloir bien ouvrir les yeux afin de les trouver tout au long du parcours.</p>
@@ -38,7 +38,7 @@ SET
 	longitude = -1.564707,
 	path_id = 2,
 	places_on_open = "10",
-	content = '<p>Tu repères des caméras de sécurité devant une banque. Tu entres dans la banque et exige de voir les images.</p><p> Ces dernières permettent d\'apercevoir en groupe de trois suspects déplaçant une remorque bien chargée. En plus des animaux de la liste du directeur du musée, il semble y avoir un animal supplémentaire. Mais la qualité des images ne permet de déterminer lequel.</p><p> Le groupe se dirige vers la Géothèque juste à côté et l\'un des individus monte sur la cariole pour déterriorer l\'enseigne de la librairie. Puis le groupe s\'éloigne par la rue Scribe hors du champs de vision des caméras.</p>'
+	content = '<p>Tu repères des caméras de sécurité devant une banque. Tu entres dans la banque et exige de voir les images.</p><p> Ces dernières permettent d\'apercevoir en groupe de deux suspects déplaçant une remorque bien chargée.</p><p> Le groupe se dirige vers la Géothèque juste à côté et l\'un des individus monte sur la cariole pour déterriorer l\'enseigne de la librairie. Puis le groupe s\'éloigne par la rue Scribe hors du champs de vision des caméras.</p>'
 ;
 
 INSERT INTO Places
@@ -49,7 +49,9 @@ SET
 	longitude = -1.563978,
 	path_id = 2,
 	places_on_open = "11",
-	content = '<p>Tu regardes la mappemonde corrigée par le vendale. L\'auteur en a profité pour ajouter un grafiti.</p><p>\"Les Hommes ont divisé le monde pour mieux le gouverner... Nous le rendons aux animaux !\"</p><p>\"Notre prochaine cible sera un homme illustre né dans cette ville.\"</p>'
+	content = '<p>Tu regardes la mappemonde corrigée par le vendale. L\'auteur en a profité pour ajouter un grafiti.</p><p>\"Les Hommes ont divisé le monde pour mieux le gouverner... Nous rendons la Pangée aux animaux !\"</p><p>\"Notre prochaine cible sera un homme illustre né dans cette ville.\"</p>',
+	content_type = 'img',
+	media = 'img/2/worldmap.jpg'
 ;
 
 INSERT INTO Places
@@ -60,7 +62,9 @@ SET
 	longitude = -1.563055,
 	path_id = 2,
 	places_on_open = "12,13",
-	content = '<p>Dans quel état se trouve notre cher Jules ! Ce dernier semble toutefois pointer du doigt vers la direction qu\'ont pris ses aggresseurs.</p><p>Les voleurs sont partis vers la place Graslin.</p>'
+	content = '<p>Dans quel état se trouve notre cher Jules ! Ce dernier semble toutefois pointer du doigt vers la direction qu\'ont pris ses aggresseurs.</p><p>Les voleurs sont partis vers la place Graslin.</p>',
+	content_type = 'img',
+	media = 'img/2/verne.jpg'
 ;
 
 INSERT INTO Places
@@ -103,7 +107,9 @@ SET
 	longitude = -1.560198,
 	path_id = 2,
 	places_on_open = "16",
-	content = "<p>Incroyable ! Les voleurs ont forcé la grille du passage pour le traverser. La descente des escaliers a dû être cahotique.</p>"
+	content = "<p>Incroyable ! Les voleurs ont forcé la grille du passage pour le traverser. La descente des escaliers a dû être cahotique.</p>",
+	content_type = 'img',
+	media = 'img/2/pommeraye.jpg'
 ;
 INSERT INTO Places
 SET
@@ -129,7 +135,7 @@ SET
 	success_key = "sèvre",
 	content_type = "youtube",
 	media = "NoHqoEkqJas",
-	success_content = "Bravo"
+	success_content = '<p>L\'animal mytique que tu cherches est un dragon.</p>'
 ;
 INSERT INTO Places
 SET
@@ -139,7 +145,9 @@ SET
 	longitude = -1.557486,
 	path_id = 2,
 	places_on_open = "19",
-	content = "<p>Les traces suivent la rue qui porte le même nom que la basilique.</p>"
+	content = "<p>Les traces suivent la rue qui porte le même nom que la basilique.</p>",
+	content_type = 'img',
+	media = 'img/2/basilique.jpg'
 ;
 INSERT INTO Places
 SET
@@ -150,7 +158,9 @@ SET
 	path_id = 2,
 	places_on_open = "20",
 	content = "<p>L'accumulation de peinture à cet endroit semble indiquer que le voleur y a fait un arrêt.</p>
-	<p>Les traces continuent ensuite en passant par la rue basse casserie, traversant le cours des 50 otages, puis se dirigeant vers la rue des Halles.</p>"
+	<p>Les traces continuent ensuite en passant par la rue basse casserie, traversant le cours des 50 otages, puis se dirigeant vers la rue des Halles.</p>",
+	content_type = 'img',
+	media = 'img/2/oeil.jpg'
 ;
 INSERT INTO Places
 SET
@@ -161,7 +171,7 @@ SET
 	path_id = 2,
 	places_on_open = "21",
 	objects_on_open = "26",
-	content = '<p>A l\'entrée de la rue, tu rammasses une carte à jouer. Cette dernière contient la liste des animaux volés.</p><p>Cette liste diffère légèrement de la liste fournie par le directeur du musée.</p>
+	content = '<p>A l\'entrée de la rue, tu rammasses une carte à jouer. La peinture sur la carte ne laisse aucun doute : elle est tombée du chariot.</p>
 	<p>Les traces continuent sur la rue de Halles.</p>'
 ;
 
@@ -221,7 +231,9 @@ SET
 	longitude = -1.552953,
 	path_id = 2,
 	places_on_open = "25",
-	content = '<p>Les traces de peintures deviennent difficiles à suivre... Elles semblent s\'engouffrer dans la rue du château.</p>'
+	content = '<p>Les traces de peintures deviennent difficiles à suivre... Elles semblent s\'engouffrer dans la rue du château.</p>',
+	content_type = 'img',
+	media = 'img/2/pilori.jpg'
 ;
 INSERT INTO Places
 SET
@@ -248,12 +260,16 @@ SET
 	longitude = -1.550483,
 	path_id = 2,
 	places_on_open = "27",
-	content = '<p>Avant d\'entrer dans le château, tu remarques cette statue.</p><p>Quel est le prénom de cette femme ?</p>',
+	content = '<p class=\"tourisme\">La cathédrale se situe à 2 min à pied d\'ici. Le parcours ne prévoit pas d\'y passer, mais vous pouvez faire le détour si vous voulez. Le chemin est balisé.</p>
+	<p>Avant d\'entrer dans le château, tu remarques cette statue.</p><p>Quel est le prénom de cette femme ?</p>',
 	content_type = "img",
 	media = 'img/2/anne.jpg',
 	success_condition = 'password',
 	success_key = 'anne',
-	success_content = "Bravo"
+	success_content = '<p>Quand tu prononces son nom, la statue te parle.</p>
+	<p class=\"quote\">\"Tu trouveras une photo de l\'animal mytique que tu cherches au Mémorial d\'Abolition de l\'Esclavage. Pour la trouver, il faudra donner le nom de code du Maille Brezé.\" </p>
+	<p>Ce sera pour plus tard. Pour l\'instant, il faut retrouver Nahtan.</p>',
+	places_on_success = "47"
 ;
 INSERT INTO Places
 SET
@@ -268,7 +284,7 @@ SET
 	success_condition = 'password',
 	success_key = 'nathan',
 	success_content = '<p>Tu retrournes la lettre portant le nom de Nathan. Voici ce qu\'elle contient :</p>
-	<p>\"Le vendeur doit chercher du matériel pour ouvrir le coffre qui contient mon animal. Il a un contact au Lieu Unique. C\'est donc notre prochaine étape.\"</p>
+	<p class=\"quote\">\"Le vendeur doit chercher du matériel pour ouvrir le coffre qui contient mon animal. Il a un contact au Lieu Unique. C\'est donc notre prochaine étape.\"</p>
 	<p>Voici la sortie la plus rapide pour y accéder : </p>',
 	success_content_type = "img",
 	success_media = "img/2/sortie.jpg"
@@ -281,7 +297,9 @@ SET
 	longitude = -1.548758,
 	path_id = 2,
 	places_on_open = "29",
-	content = "<p>En sortant du château tu en profites pour admirer les douves et le parc extérieur.</p>"
+	content = "<p>En sortant du château tu en profites pour admirer les douves et le parc extérieur.</p>",
+	content_type = 'img',
+	media = "img/2/chateau.jpeg"
 ;
 INSERT INTO Places
 SET
@@ -290,7 +308,9 @@ SET
 	latitude = 47.217309,
 	longitude = -1.547999,
 	path_id = 2,
-	content = "<p>Le cours Saint Pierre accueille des foires deux fois par an.</p>"
+	content = "<p>Le cours Saint Pierre accueille des foires deux fois par an.</p>",
+	content_type = 'img',
+	media = "img/2/pierre.jpg"
 ;
 INSERT INTO Places
 SET
@@ -302,20 +322,21 @@ SET
 	places_on_open = "31,33",
 	content = '<p class=\"tourisme\">Le Lieu Unique était auparavent l\'usine LU (pour Lefebvre-Utile). Depuis la fin du XXe siècle et l\'abandon de l\'usine, c\'est devenu un espace culturel. On y on y trouve un espace d\'expositions et de spectacles ainsi qu\'un café/bar/club, un restaurant, une librairie, une boutique et un hammam.</p>
 	<p>En fouillant les lieux tu tombes sur un homme ligoté et bailloné. Tu le libère :</p>
-	<p class=\"quote\">\"Je m\'appelle Nathan, je travaille dans un bar à côté. J\'suivi un type bizarre pour lui acheter... un animal. Mais quand il a enfin pu ouvrir le coffre qui le renfermait, son complice qui l\'attendait ici est devenu fou. Il m\'a ligotté ici, a dissimulé un animal, puis ils sont tous les deux partis en criant : Redécorrons Bouffay !\"</p>
-	<p>Nathan vous suit afin d\'identifier ses aggresseurs.</p>',
+	<p class=\"quote\">\"Je m\'appelle Nathan, je travaille dans un bar à côté. J\'ai suivi un type bizarre pour lui acheter... un animal. Mais quand il a enfin pu ouvrir le coffre qui le renfermait, son complice qui l\'attendait ici est devenu fou. Il m\'a ligotté ici, a dissimulé un animal, puis ils sont tous les deux partis en criant : Redécorrons Bouffay !\"</p>
+	<p>Nathan vous suit afin d\'identifier ses aggresseurs.</p>
+	<p class=\"tourisme\">A 10 min à pied d\'ici (près de la gare SNCF) se trouve le jardin des plantes. Il est décoré par Claude Ponti. Le parcrous ne prévoit pas le détour, mais je vous le recommande si vous avez le temps.</p>',
 	content_type = 'img',
 	media = "img/2/lu.jpg"
 ;
 INSERT INTO Places
 SET
 	id=31,
-	name = "Le mirroir d\'eau",
+	name = "Le miroir d\'eau",
 	latitude = 47.215356,
 	longitude = -1.548826,
 	path_id = 2,
 	places_on_open = "32",
-	content = "Avec ses 32 jets, l\'oeuvre d\'art' maintient 2 cm d\'eau afin de produire son effet de mirroir.",
+	content = "Avec ses 32 jets, l\'oeuvre d\'art' maintient 2 cm d\'eau afin de produire son effet de miroir.",
 	content_type = 'img',
 	media = 'img/2/miroirdeau.jpg'
 ;
@@ -338,7 +359,9 @@ SET
 	longitude = -1.553262,
 	path_id = 2,
 	places_on_open = "34",
-	content = '<p>Tu ne vois rien d\'anormal sur la place Bouffay. Peut-être qu\'il parlait de la rue Bouffay ?</p>'
+	content = '<p>Tu ne vois rien d\'anormal sur la place Bouffay. Peut-être qu\'il parlait de la rue Bouffay ?</p>',
+	content_type = 'img',
+	media = "img/2/buffay.jpg"
 ;
 INSERT INTO Places
 SET
@@ -361,7 +384,9 @@ SET
 	path_id = 2,
 	places_on_open = "36",
 	content = '<p class=\"tourisme\">L\'Île Feydeau tient se nom d\'île, car la Loire était autrefois plus large et cet endroit était donc une île. Le sol y est très friable, pourtant elle a été construite très tôt. Lors de ta ballade, regarde bien les immeubles. Nombres d\'entre eux sont penchés à cause des mouvements de terrain.</p>
-	<p>Les traces de sang continuent vers les rue Kervégan.</p>'
+	<p>Les traces de sang continuent vers les rue Kervégan.</p>',
+	content_type = 'img',
+	media = "img/2/feydeau.jpg"
 ;
 INSERT INTO Places
 SET
@@ -387,7 +412,8 @@ SET
 	places_on_success = "40",
 	content = '<p>Un homme blessé git au milieu de la place</p>
 	<p class=\"quote\">Nathan bondit : \"C\'est lui ! C\'est mon agresseur ! Enfin, celui qui voulait me vendre l\'animal dans un premier temps.\"</p>
-	<p class=\"quote\">Ce dernier répond : \"Hervé, mon partenaire, m\'a abandonné. Je suis trop lent avec ma blessure. Mais je suis fier de ce que j\'ai réalisé. Je libère les animaux ! Je vais être célèbre ! Dites mon nom et je me rendrais sans histoire.\"</p>',
+	<p class=\"quote\">Ce dernier répond : \"Eugène, mon partenaire, m\'a abandonné. Je suis trop lent avec ma blessure. Mais je suis fier de ce que j\'ai réalisé. Je libère les animaux ! Je vais être célèbre ! Dites mon nom et je me rendrais sans histoire.\"</p>
+	<p>Voici la photo de notre homme. Saurez-vous trouver son prénom ?</p>',
 	content_type = 'img',
 	success_condition = 'password',
 	media = 'img/2/henri.jpg',
@@ -405,7 +431,9 @@ SET
 	longitude = -1.562001,
 	path_id = 2,
 	places_on_open = "39",
-	content = '<p class=\"tourisme\">Cet espace accueille notemment une médiathèque.</p>'
+	content = '<p class=\"tourisme\">Cet espace accueille notemment une médiathèque.</p>',
+	content_type = 'img',
+	media = 'img/2/demy.jpg'
 ;
 INSERT INTO Places
 SET
@@ -414,7 +442,10 @@ SET
 	latitude = 47.209715,
 	longitude = -1.561695,
 	path_id = 2,
-	content = "To be definied"
+	content = '<p>Henri commence à s\'ouvrir un peu : </p>
+	<p class=\"quote\">\"Eugène affirme qu\'il a trouvé une technique permettant de donner vie à des animaux empaillés.
+	Il a un atelier dans le coin où il avait l\'habitude de faire ses expériences. Je ne connais pas l\'adresse exacte.
+	Par contre, on se retrouvait régulièrement à l\'Esperance Café. Je suppose qu\'il ne doit pas être loin.\"</p>'
 ;
 INSERT INTO Places
 SET
@@ -424,27 +455,68 @@ SET
 	longitude = -1.561448,
 	path_id = 2,
 	places_on_open = "41",
-	content = "To be definied"
+	content = "<p>Votre contact policier vous attend au Palais de Justice. Dès qu\'il vous voit arriver, il embarque Henri sans faire d\'avantage de commentaires.</p>"
 ;
 INSERT INTO Places
 SET
 	id=41,
-	name = "Terrasses-Capsules",
+	name = "Espérance café",
 	latitude = 47.208314,
 	longitude = -1.563224,
 	path_id = 2,
-	places_on_open = "42",
-	content = "To be definied"
+	places_on_open = "49",
+	content = '<p>Le patron vous reçoit jovialement. Eugène est un habitué. Son atelier se situe au 34 rue Noue Bras de Fer.</p>',
+	content_type = 'img',
+	media = 'img/2/cafe.jpg'
 ;
 INSERT INTO Places
 SET
+	id=49,
+	name = "Atelier de Eugène",
+	latitude = 47.206998,
+	longitude = -1.562602,
+	path_id = 2,
+	places_on_open = "42",
+	content = '<p>L\'atelier déborde d\'animaux mécaniques.</p>
+	<p class=\"quote\">\"Ces animaux ressemblent à ceux des machines de l\'Île. On pourrait demander leur avis sur la question\", propose Nahtan.</p>
+	<p>Tu fouilles de fond en comble, mais ne trouve rien d\'interressant à part un coffre.</p>
+	<p>Pour l\'ouvrir, il faut trouver la longueur totale indiquée sur le mètre ruban.</p>',
+	content_type = 'img',
+	media = 'img/2/metre.jpg',
+	success_condition ='password',
+	success_key = '517',
+	success_content = '<p>Dans le coffre, tu trouves des plans. 
+	Il semble que le projet de souffler la vie aux animaux empaillés soit plus un projet mecanique que biologique.</p>',
+	objects_on_success = '27'
+;
+INSERT INTO Objects
+SET
+	id=27,
+	name = "Les plans",
+	path_id = 2,
+	content_type = "img",
+	thumb = "img/2/plans.png",
+	media = "img/2/eleplan.png",
+	content = '<p>Deux plans trouvés dans l\'atelier d\'Eugène. Un pour un éléphant et un pour un hippocampe.</p>'
+;
+
+INSERT INTO Places
+SET
 	id=42,
-	name = "L\'arbre aux herons",
+	name = "Les machines de l\'Île",
 	latitude = 47.20645,
 	longitude = -1.564629,
 	path_id = 2,
-	places_on_open = "43",
-	content = "To be definied"
+	places_on_open = "43,50",
+	content = '<p>Le directeur des machines semble bien occupé. Il vous reçoit rapidement.</p>
+	<p class=\"quote\">\"Un individu assez louche a effectivement tenté de nous vendre un éléphant et un hippocampe.
+	Nous avons pris l\'éléphant. Il est énorme !\"</p>
+	<p> Apparemment, l\'homme disposait d\'un troisième animal qu\'il n\'a pas voulu montrer. 
+	Par contre, Eugène a demandé des renseignements pour trouver des cables très spécifiques.</p>
+	<p class=\"quote\">\"Il y en a près de la grue Titan Jaune.\", vous confie le directeur.</p>
+	',
+	content_type = 'img',
+	media = 'img/2/heron.jpg'
 ;
 INSERT INTO Places
 SET
@@ -454,7 +526,9 @@ SET
 	longitude = -1.565788,
 	path_id = 2,
 	places_on_open = "44",
-	content = "To be definied"
+	content = '<p class=\"tourisme\">Ces paniers sont praticables. L\'été des ballons sont mis à disposition.</p>',
+	content_type = 'img',
+	media = 'img/2/basket.jpg'
 ;
 INSERT INTO Places
 SET
@@ -463,9 +537,25 @@ SET
 	latitude = 47.205914,
 	longitude = -1.567735,
 	path_id = 2,
-	places_on_open = "45",
-	content = "To be definied"
+	content = '<p class=\"tourisme\">Le carousel divertit autant les enfants que les plus agés.</p>',
+	content_type = 'img',
+	media = 'img/2/carousel.jpg'
 ;
+INSERT INTO Places
+SET
+	id=50,
+	name = "Grue Titan Jaune",
+	latitude = 47.205093,
+	longitude = -1.569776,
+	path_id = 2,
+	places_on_open = "45,48",
+	content = '<p>Tu interroges un SDF qui semble prendre la grue pour abris. Ce dernier affirme avoir vu un homme fouiller les lieux à la recherche de cables. Quand ils les a trouvé, il aurait dit :</p>
+	<p class=\"quote\">\"Avec ça, je n\'aurais aucun mal à l\'accrocher au musée Dobrée. Ca va être magnifique !\"</p>
+	<p class=\"tourisme\">A proximité, vous pouvez voir deux ouevres artistiques : les Anneaux de Buuren (le long du quai au Sud) et la Résolution des Forces en Présence (la pomme de pin géante)</p>',
+	content_type = 'img',
+	media = 'img/2/art.jpg'
+;
+
 INSERT INTO Places
 SET
 	id=45,
@@ -474,7 +564,9 @@ SET
 	longitude = -1.568132,
 	path_id = 2,
 	places_on_open = "46",
-	content = "To be definied"
+	content = '<p class=\"tourisme\">Depuis ce bar/restaurant, vous avez une belle vue sur le Maille Brezé, bateau qui sert de musée naval aujourd\'hui.</p>',
+	content_type = 'img',
+	media = 'img/2/breze.jpg'
 ;
 INSERT INTO Places
 SET
@@ -483,8 +575,12 @@ SET
 	latitude = 47.207773,
 	longitude = -1.565605,
 	path_id = 2,
-	places_on_open = "47",
-	content = "To be definied"
+	content = '<p class=\"tourisme\">Depuis le pont, tu as une vue imparable sur le quai de la fosse, aussi appelé quai de la fesse par les étudiants
+	Tout comme l\'Île Faydeau, le sol du quai est très instable. Du coup, les constructions s\'affessent.
+	(Je suppse que le surnom du quai vient de là ?)</p>',
+	content_type = 'img',
+	media = 'img/2/quaifosse.jpg',
+	places_on_open = "51"
 ;
 INSERT INTO Places
 SET
@@ -493,9 +589,42 @@ SET
 	latitude = 47.209037,
 	longitude = -1.566297,
 	path_id = 2,
-	places_on_open = "48",
-	content = "To be definied"
+	content = '<p>Tu te souviens des paroles d\'Anne de Bretagne :</p>
+	<p class=\"quote\">\"Tu trouveras une photo de l\'animal mytique que tu cherches au Mémorial d\'Abolition de l\'Esclavage. Pour la trouver, il faudra donner le nom de code du Maille Brezé.\" </p>',
+	success_condition = 'password',
+	success_key = 'd627',
+	success_content = 'Bravo, voici la photo de l\'animal mytique.',
+	objects_on_success = '28'
 ;
+INSERT INTO Objects
+SET
+	id=28,
+	name = 'Photo de l\'animal mytique',
+	path_id = 2,
+	content_type = "img",
+	thumb = "img/2/mytique.jpg",
+	media = "img/2/mytique.jpg",
+	content = '<p>Evidemment, il ne fallait pas s\'attendre à de la haute définition...</p>';
+
+INSERT INTO Places
+SET
+	id=51,
+	name = "Eugène",
+	latitude = 47.211411,
+	longitude = -1.567275,
+	path_id = 2,
+	content = '<p>Vous marchez tranquillement vers le musée que soudain Nathan s\'écrie :</p>
+	<p class=\"quote\">\"C\'est lui, c\'est Eugène ! Arrêtez-le !\"</p>
+	<p>Un policier qui passait par là s\'execute après lui avoir expliqué l\'affaire.</p>
+	<p>Mais quel est le nom de famille d\'Eugène ?</p>',
+	content_type = 'img',
+	media = 'img/2/eugene.jpg',
+	success_condition = 'password',
+	success_key = 'livet',
+	success_content = '<p>Eugène Livet vous fait une confidence avant d\'être emmené :</p>
+	<p class=\"quote\">\"L\'aventure vallait le coup. Je ne regrette rien.\"</p>'
+;
+
 INSERT INTO Places
 SET
 	id=48,
@@ -503,7 +632,16 @@ SET
 	latitude = 47.212044,
 	longitude = -1.565562,
 	path_id = 2,
-	content = "To be definied"
+	content = '<p>L\'animal est caché là quelque part. Il faut le trouver.</p>
+	<p>Quel est le deuxième mot inscrit sous l\'animal ?</p>',
+	content_type = 'img',
+	media = 'img/2/dobree.jpg',
+	success_condition = 'password',
+	success_media = 'img/2/dragon.jpg',
+	success_content_type = 'img',
+	success_content = 'Vous avez retrouvé le dragon. Bravo ! C\'est gagné :)',
+	objects_on_success = -1,
+	success_key = 'arogac'
 ;
 
 
@@ -541,7 +679,7 @@ VALUES
 	"Sur quel type de magasin est positionné ce canard géant ?",
 	"password",
 	"sex",
-	"Bravo",
+	"Curieuse enseigne pour un sex shop, non ?",
 	"img",
 	"img/2/canard_soluce.jpg",
 	2,
@@ -555,7 +693,7 @@ VALUES
 	"A quel groupe de rock fait référence le costume de ce chat ?",
 	"password",
 	"indochine",
-	"Bravo",
+	"Clin d\'oeil humouristique de cette épicerie asiatique.",
 	"img",
 	"img/2/emocat_soluce.jpg",
 	2,
@@ -569,7 +707,7 @@ VALUES
 	"En quoi est déguisé ce cheval amateur de glaces ?",
 	"password",
 	"licorne",
-	"Bravo",
+	'Il ne s\'agit pas ici de l\'animal mytique que l\'on cherche depuis le début... mais d\'un simple cheval.',
 	"img",
 	"img/2/cheval_soluce.jpg",
 	2,
@@ -583,7 +721,7 @@ VALUES
 	"Combien de parties possède la trompe de cet éléphant ?",
 	"password",
 	"11",
-	"Bravo",
+	'Cet éléphant est maintenant devenu le symbole de la ville. Un peu comme la Petite Sirène à Copenhague, c\'est une référence à un auteur local.',
 	"img",
 	"img/2/elephant_soluce.jpg",
 	2,
@@ -592,17 +730,17 @@ VALUES
 ),
 (
 	12,
-	"Hippcampe",
+	"Hippocampe",
 	"img/2/animals.png",
 	"Dans quel manège se trouve cet hippocampe ?",
 	"password",
 	"andrea",
-	"Bravo",
+	"Il ne faut pas confondre ce manège avec le carrousel des mondes marins qui se situe un peu plus loin.",
 	"img",
-	"img/2/hippocampe.png",
+	"img/2/hippocampe.jpg",
 	2,
 	"img",
-	"img/2/hippocampe.png"
+	"img/2/hippocampe.jpg"
 ),
 (
 	13,
@@ -611,7 +749,7 @@ VALUES
 	"Par quoi a été remplacée la tête de ce volatile ?",
 	"password",
 	"fourchette",
-	"Bravo",
+	"Non, il n\'y a rien de sexuel dans cette double enseigne.",
 	"img",
 	"img/2/oursoie_soluce.jpg",
 	2,
@@ -625,7 +763,7 @@ VALUES
 	"A côté de quel autre animal ce trouve l'ours-enseigne ?",
 	"password",
 	"oie",
-	"Bravo",
+	"Non, il n\'y a rien de sexuel dans cette double enseigne.",
 	"img",
 	"img/2/oursoie_soluce.jpg",
 	2,
@@ -639,7 +777,7 @@ VALUES
 	"Combien de caméras surveillent la sortie de cet animal ?",
 	"password",
 	"4",
-	"Bravo",
+	"Lors de la dernière édition du voyage à Nantes (un festival annuel visant à mettre en valeur le patrimoine nantais), une vague d\'enseignes originales ont été créées. Leve les yeux :)",
 	"img",
 	"img/2/perroquet_soluce.jpg",
 	2,
@@ -653,7 +791,7 @@ VALUES
 	"Cet animal a permis de décorer les enseignes voisines. Par quel moyen ?",
 	"password",
 	"perruque",
-	"Bravo",
+	"Il a le poil soyeux ce yack, non ?",
 	"img",
 	"img/2/yack.jpg",
 	2,
@@ -667,7 +805,7 @@ VALUES
 	"Sur quel type de restaurant se trouve la cigale ?",
 	"password",
 	"brasserie",
-	"Bravo",
+	"Véritable institution à Nantes, la Cigale s\'est inspirée des plus belles brasseries parisiennes.",
 	"img",
 	"img/2/cigale_soluce.jpg",
 	2,
@@ -681,7 +819,7 @@ VALUES
 	"De quelle couleur est le pied avant droit de cet animal ?",
 	"password",
 	"bleu",
-	"Bravo",
+	"Bien joué :)",
 	"img",
 	"img/2/girafe.jpg",
 	2,
@@ -695,7 +833,7 @@ VALUES
 	"Quelle est la température au Sénégal d'après le termomètre à côté du chef-cochon ?",
 	"password",
 	"47",
-	"Bravo",
+	"On remarquera que le restaurant possède d\'autres cochons sur sa devanture.",
 	"img",
 	"img/2/cochon.jpg",
 	2,
@@ -708,7 +846,7 @@ VALUES
 	"Quel est le premier mot sous l'enseigne de la tortue ?",
 	"password",
 	"expecto",
-	"Bravo",
+	"Exact ! Tu ne te laisses pas déconcenter par la maison à colombage voisine.",
 	"img",
 	"img/2/tortue_soluce.jpg",
 	2,
@@ -721,7 +859,7 @@ VALUES
 	"Que représente ce homard ? A la place de quoi est-il dessiné ?",
 	"password",
 	"cancer",
-	"Bravo",
+	"Effectivement, seule une partie des signes du zodiaques ont été représenté ici.",
 	"img",
 	"img/2/homard_hint.jpg",
 	2,
@@ -734,7 +872,7 @@ VALUES
 	"Sur quel magasin a été placé la lapin ?",
 	"password",
 	"boucherie",
-	"Bravo",
+	"On remarquera que le lapin n\'est pas le seul animal exposé par la boucherie.",
 	"img",
 	"img/2/lapin_hint.jpg",
 	2,
@@ -747,7 +885,7 @@ VALUES
 	"Quel cépage ce site dans la vitrine de ce chat ?",
 	"password",
 	"muscadet",
-	"Bravo",
+	"Nantes est très fière de son vignoble. Si le muscadet et le gros plan ne sont pas des cépages qui ont bonne réputation, je peux vous assurer qu\'il existe de nombreuses bouteilles qui valent le détour.",
 	"img",
 	"img/2/chatnoir_soluce.jpg",
 	2,
@@ -760,7 +898,7 @@ VALUES
 	"A la sortie de quel monument nantais peut-on voir ce ver ?",
 	"password",
 	"pommeraye",
-	"Bravo",
+	"Ce ver-mosaique est idéalement placé pour être vu.",
 	"img",
 	"img/2/ver.jpg",
 	2,
@@ -773,7 +911,7 @@ VALUES
 	"Quel est le numéro situé entre les deux hermines ?",
 	"password",
 	"22",
-	"Bravo",
+	"L\'hermine est un symbole de la royauté et de la Bretagne. Nantes n\'est pas officiellement en Bretagne, mais beaucoup de nantais se revendiquent bretons.",
 	"img",
 	"img/2/hermine_soluce.jpg",
 	2,
