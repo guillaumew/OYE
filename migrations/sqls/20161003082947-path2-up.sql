@@ -580,29 +580,29 @@ VALUES
 	11,
 	"Elephant",
 	"img/2/animals.png",
-	"Cet éléphant, symbole de Nantes, fait référence à l'univers de quel auteur nantais ?",
+	"Combien de parties possède la trompe de cet éléphant ?",
 	"password",
-	"verne",
+	"11",
 	"Bravo",
 	"img",
-	"img/2/animals.png",
+	"img/2/elephant_soluce.jpg",
 	2,
 	"img",
-	"img/2/animals.png"
+	"img/2/elephant_hint.png"
 ),
 (
 	12,
-	"Héron",
+	"Hippcampe",
 	"img/2/animals.png",
-	"Où peut-on admirer le héron des machines de l'Île ?",
+	"Dans quel manège se trouve cet hippocampe ?",
 	"password",
-	"galerie",
+	"andrea",
 	"Bravo",
 	"img",
-	"img/2/animals.png",
+	"img/2/hippocampe.png",
 	2,
 	"img",
-	"img/2/animals.png"
+	"img/2/hippocampe.png"
 ),
 (
 	13,
@@ -622,7 +622,7 @@ VALUES
 	14,
 	"Ours",
 	"img/2/animals.png",
-	"A côté de quel autre animal ce trouve l'ours en peluche ?",
+	"A côté de quel autre animal ce trouve l'ours-enseigne ?",
 	"password",
 	"oie",
 	"Bravo",
@@ -713,7 +713,7 @@ VALUES
 	"img/2/tortue_soluce.jpg",
 	2,
 	"img",
-	"img/2/tortue_soluce.jpg"
+	"img/2/tortue_hint.jpg"
 ),
 (	21,
 	"Homard",
@@ -778,6 +778,6 @@ VALUES
 	"img/2/hermine_soluce.jpg",
 	2,
 	"img",
-	"img/2/hermine_soluce.jpg"
+	"img/2/hermine_hint.jpg"
 )
 ;
