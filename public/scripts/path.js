@@ -5,7 +5,11 @@ var myPosition;
 var current_item;
 var myNumber;
 var others_markers={};
-var socket = io.connect('http://localhost:5000');
+var host = window.location.hostname;
+if(host==="localhost"){
+	host="http://localhost:5000/";
+}
+var socket = io.connect(host);
 
 function closeContent(delete_media=true){
 	if(delete_media){

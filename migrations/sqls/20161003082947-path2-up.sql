@@ -15,8 +15,8 @@ SET
 	init_content = "A tous les detectives en herbes : il y a eu un cambriolage au muséum d\'histoire naturelle. La police ne dispose pas de suffisemment de ressources pour mener à bien cette enquête. Si le dossier vous intéresse, rendez-vous sur la place de la monnaie.",
 	win_content = "Vous avez retrouvé le dragon. Bravo ! C\'est gagné :)",
 	open_places = "8",
-	latitude = 47.214901,
-	longitude = -1.553836,
+	latitude = 47.213188,
+	longitude = -1.565203,
 	type = "Enquête",
 	total_steps = 44
 ;
