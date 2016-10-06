@@ -48,13 +48,13 @@ body{
 #postion_update{
 	text-align: center;
     background-color: #34B3AC;
-    width: 100PX;
-    height: 100px;
+    width: 90PX;
+    height: 90px;
     border-radius: 50px;
     display: inline-block;
     position: absolute;
-    top:0;
-    right: 1px;
+    top:5px;
+    right: 5px;
 }
 
 #position_content{
@@ -63,7 +63,7 @@ body{
     color: white;
     font-size: 16px;
     left: 0;
-    top: 30px;
+    top: 20px;
     right: 0;
 }
 #legend{

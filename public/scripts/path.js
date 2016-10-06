@@ -139,11 +139,13 @@ function checkPosition(){
 		check_position_available = false;
 		position_content = document.getElementById("position_content");
 		position_content.innerHTML = "Verification en cours";
+		document.getElementById("postion_update").style.backgroundColor = "#14938C";
 		function errorPostion(err){
 			console.log(err);
-			flashMessage("Une erreur est survenue","red");
+			flashMessage("Impossible d'obtenir ta position \n"+err,"red");
 			check_position_available = true;
 			position_content.innerHTML = "Vérifier ma position";
+			document.getElementById("postion_update").style.backgroundColor = "#34B3AC";
 		}
 
 		function displayPosition(position){
@@ -153,8 +155,9 @@ function checkPosition(){
 			flashMessage("Votre position a été mise à jour","green");
 			check_position_available = true;
 			position_content.innerHTML = "Vérifier ma position";
+			document.getElementById("postion_update").style.backgroundColor = "#34B3AC";
 		}
-		navigator.geolocation.getCurrentPosition(displayPosition,errorPostion);
+		navigator.geolocation.getCurrentPosition(displayPosition,errorPostion,{timeout:10000});
 	}
 
 }
