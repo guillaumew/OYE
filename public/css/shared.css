@@ -5,7 +5,10 @@
 
 body{
     margin: 0;
+    color: #121326;
+    font-family: Trebuchet MS;
 }
+
 h1{
     font-family: "multicolore", Helvetica, Arial, sans-serif;
     text-align: center;
