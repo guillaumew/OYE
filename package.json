@@ -10,7 +10,8 @@
     "ejs": "^2.5.2",
     "db-migrate" : "0.10.0-beta.16",
     "db-migrate-mysql" : "1.1.7",
-    "express-sslify" : "1.1.0"
+    "express-sslify" : "1.1.0",
+    "socket.io" : "1.4.8"
   },
   "main": "index.js",
   "scripts": {

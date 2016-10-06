@@ -1,5 +1,12 @@
 /* Replace with your SQL commands */
 
+ALTER TABLE Paths
+ADD COLUMN total_steps SMALLINT UNSIGNED DEFAULT NULL;
+
+UPDATE Paths
+SET total_steps = 7 
+WHERE id=1;
+
 INSERT INTO Paths
 SET
 	id=2,
@@ -10,7 +17,8 @@ SET
 	open_places = "8",
 	latitude = 47.214901,
 	longitude = -1.553836,
-	type = "Enquête"
+	type = "Enquête",
+	total_steps = 44
 ;
 
 INSERT INTO Places
@@ -23,7 +31,7 @@ SET
 	objects_on_open = "7",
 	places_on_open = "9",
 	content = '<p class=\"quote\">\"C\'est affreux\", soupire le directeur du musée.\"Les scélérats ont volé de nombreux spécimens exposés. Je ne sais pas si nous pourrons les retrouver. Vous devez nous aider ! \"</p>
-	<p>Le directeur te fournit la liste des espèces à retrouver. Il va falloir bien ouvrir les yeux afin de les trouver tout au long du parcours.</p>
+	<p>Le directeur te fournit la liste des animaux empaillés à retrouver. Il va falloir bien ouvrir les yeux afin de les trouver tout au long du parcours.</p>
 	<p class=\"quote\">\"Le voleur a également volé un coffre. Je ne peux pas vous révéler le contenu, mais il faut absolument le retrouver !\"</p>
 	<p>Il te remet également un appareil permettant d\'appeler la centrale de police afin de communiquer votre avancée dans l\'enquête.</p>',
 	content_type = 'youtube',
@@ -38,7 +46,7 @@ SET
 	longitude = -1.564707,
 	path_id = 2,
 	places_on_open = "10",
-	content = '<p>Tu repères des caméras de sécurité devant une banque. Tu entres dans la banque et exige de voir les images.</p><p> Ces dernières permettent d\'apercevoir en groupe de deux suspects déplaçant une remorque bien chargée.</p><p> Le groupe se dirige vers la Géothèque juste à côté et l\'un des individus monte sur la cariole pour déterriorer l\'enseigne de la librairie. Puis le groupe s\'éloigne par la rue Scribe hors du champs de vision des caméras.</p>'
+	content = '<p>Tu repères des caméras de sécurité devant une banque. Tu entres et exige de voir les images.</p><p> Ces dernières permettent d\'apercevoir en groupe de deux suspects déplaçant une remorque bien chargée.</p><p> Le groupe se dirige vers la Géothèque juste à côté et l\'un des individus monte sur la cariole pour déterriorer l\'enseigne de la librairie. Puis le groupe s\'éloigne par la rue Scribe hors du champs de vision des caméras.</p>'
 ;
 
 INSERT INTO Places
@@ -182,7 +190,7 @@ SET
 	path_id = 2,
 	content_type = "img",
 	thumb = "img/2/2pique_thumb.jpg",
-	media = "img/2/2pique_thumb.jpg",
+	media = "img/2/2pique.jpg",
 	content = '<p>Il s\'agit de la carte trouvée à l\'entrée de la rue des Halles.</p>'
 ;
 INSERT INTO Places
@@ -243,7 +251,8 @@ SET
 	longitude = -1.552286,
 	path_id = 2,
 	places_on_open = "26",
-	content = '<p>Cela ne peut pas être une coïncidence. Cette enseigne, c\'est exactement la carte que tu as trouvée.</p>
+	content = '<p>Les traces sont maintenant totalement effacées. Tu te demandes comment faire pour continuer à pister le voleur, quand ton regard croise l\'enseigne d\'un bar.</p>
+	<p>Cela ne peut pas être une coïncidence. Cette enseigne, c\'est exactement la carte que tu as trouvée.</p>
 	<p>Tu entres dans le bar et commences à interroger le patron.</p>
 	<p>Feignant le naïf au début de l\'entretien, tu arrivers à le faire parler.</p>
 	<p class=\"quote\">\" J\'ai entendu un client tenter de convaincre, Nathan, un de mes serveurs qu\'il avait trouvé une bête mytique, je n\'ai pas saisi laquelle."</p>
@@ -308,7 +317,7 @@ SET
 	latitude = 47.217309,
 	longitude = -1.547999,
 	path_id = 2,
-	content = "<p>Le cours Saint Pierre accueille des foires deux fois par an.</p>",
+	content = '<p class=\"tourisme\">Le cours Saint Pierre accueille des foires deux fois par an.</p>',
 	content_type = 'img',
 	media = "img/2/pierre.jpg"
 ;
@@ -321,7 +330,7 @@ SET
 	path_id = 2,
 	places_on_open = "31,33",
 	content = '<p class=\"tourisme\">Le Lieu Unique était auparavent l\'usine LU (pour Lefebvre-Utile). Depuis la fin du XXe siècle et l\'abandon de l\'usine, c\'est devenu un espace culturel. On y on y trouve un espace d\'expositions et de spectacles ainsi qu\'un café/bar/club, un restaurant, une librairie, une boutique et un hammam.</p>
-	<p>En fouillant les lieux tu tombes sur un homme ligoté et bailloné. Tu le libère :</p>
+	<p>En fouillant les lieux tu tombes sur un homme ligoté et bailloné. Tu le libères :</p>
 	<p class=\"quote\">\"Je m\'appelle Nathan, je travaille dans un bar à côté. J\'ai suivi un type bizarre pour lui acheter... un animal. Mais quand il a enfin pu ouvrir le coffre qui le renfermait, son complice qui l\'attendait ici est devenu fou. Il m\'a ligotté ici, a dissimulé un animal, puis ils sont tous les deux partis en criant : Redécorrons Bouffay !\"</p>
 	<p>Nathan vous suit afin d\'identifier ses aggresseurs.</p>
 	<p class=\"tourisme\">A 10 min à pied d\'ici (près de la gare SNCF) se trouve le jardin des plantes. Il est décoré par Claude Ponti. Le parcrous ne prévoit pas le détour, mais je vous le recommande si vous avez le temps.</p>',
@@ -336,7 +345,7 @@ SET
 	longitude = -1.548826,
 	path_id = 2,
 	places_on_open = "32",
-	content = "Avec ses 32 jets, l\'oeuvre d\'art' maintient 2 cm d\'eau afin de produire son effet de miroir.",
+	content = '<p class=\"tourisme\">Avec ses 32 jets, l\'oeuvre d\'art maintient 2 cm d\'eau afin de produire son effet de miroir.</p>',
 	content_type = 'img',
 	media = 'img/2/miroirdeau.jpg'
 ;
@@ -347,7 +356,7 @@ SET
 	latitude = 47.214744,
 	longitude = -1.550564,
 	path_id = 2,
-	content = "Est-ce que ce terrain de foot est réglementaire ?",
+	content = '<p class=\"tourisme\">Est-ce que ce terrain de foot est réglementaire ?</p>',
 	content_type = 'img',
 	media = 'img/2/anamorphose.jpg'
 ;
@@ -359,7 +368,7 @@ SET
 	longitude = -1.553262,
 	path_id = 2,
 	places_on_open = "34",
-	content = '<p>Tu ne vois rien d\'anormal sur la place Bouffay. Peut-être qu\'il parlait de la rue Bouffay ?</p>',
+	content = '<p>Tu ne vois rien d\'anormal sur la place Bouffay. Peut-être qu\'il parlait de la rue du Bouffay ?</p>',
 	content_type = 'img',
 	media = "img/2/buffay.jpg"
 ;
@@ -371,7 +380,7 @@ SET
 	longitude = -1.553836,
 	path_id = 2,
 	places_on_open = "35",
-	content = '<p>Effectivement, cette rue a bien été visitée par nos hommes !</p>
+	content = '<p>Effectivement, cette rue a bien été visitée et décorée par nos hommes !</p>
 	<p>D\'ailleurs, l\'un d\'entre eux a du se blesser en accrochant l\'un des animaux puisqu\'on trouve des taches de sang.</p>
 	<p>La poursuite s\'annonce à nouveau facile. L\'homme a pris à gauche en sortant vers la rue de la Paix / bon secours.</p>'
 ;
@@ -455,7 +464,9 @@ SET
 	longitude = -1.561448,
 	path_id = 2,
 	places_on_open = "41",
-	content = "<p>Votre contact policier vous attend au Palais de Justice. Dès qu\'il vous voit arriver, il embarque Henri sans faire d\'avantage de commentaires.</p>"
+	content = "<p>Votre contact policier vous attend au Palais de Justice. Dès qu\'il vous voit arriver, il embarque Henri sans faire d\'avantage de commentaires.</p>",
+	content_type = 'img',
+	media = 'img/2/palais.jpg'
 ;
 INSERT INTO Places
 SET
@@ -496,7 +507,7 @@ SET
 	path_id = 2,
 	content_type = "img",
 	thumb = "img/2/plans.png",
-	media = "img/2/eleplan.png",
+	media = "img/2/eleplan.jpg",
 	content = '<p>Deux plans trouvés dans l\'atelier d\'Eugène. Un pour un éléphant et un pour un hippocampe.</p>'
 ;
 
@@ -549,7 +560,7 @@ SET
 	longitude = -1.569776,
 	path_id = 2,
 	places_on_open = "45,48",
-	content = '<p>Tu interroges un SDF qui semble prendre la grue pour abris. Ce dernier affirme avoir vu un homme fouiller les lieux à la recherche de cables. Quand ils les a trouvé, il aurait dit :</p>
+	content = '<p>Tu interroges un SDF qui semble prendre la grue pour abris. Ce dernier affirme avoir vu un homme fouiller les lieux à la recherche de cables. Quand ils les a trouvés, il aurait dit :</p>
 	<p class=\"quote\">\"Avec ça, je n\'aurais aucun mal à l\'accrocher au musée Dobrée. Ca va être magnifique !\"</p>
 	<p class=\"tourisme\">A proximité, vous pouvez voir deux ouevres artistiques : les Anneaux de Buuren (le long du quai au Sud) et la Résolution des Forces en Présence (la pomme de pin géante)</p>',
 	content_type = 'img',
@@ -622,7 +633,8 @@ SET
 	success_condition = 'password',
 	success_key = 'livet',
 	success_content = '<p>Eugène Livet vous fait une confidence avant d\'être emmené :</p>
-	<p class=\"quote\">\"L\'aventure vallait le coup. Je ne regrette rien.\"</p>'
+	<p class=\"quote\">\"L\'aventure vallait le coup. Je ne regrette rien.\"</p>
+	<p>Par contre, Eugène a eu le temps de se débarrasser de l\'animal mytique. Il faut continuer à le chercher.</p>'
 ;
 
 INSERT INTO Places

@@ -36,7 +36,7 @@ app.get('/', function(request, response) {
 });
 
 app.get('/path/:pageid', function(request,response){
-	connection.query('SELECT id, name, init_content, win_content, give_objects, open_places, latitude, longitude from Paths where id='+request.params.pageid, function(err1, path, fields) {
+	connection.query('SELECT id, name, init_content, win_content, give_objects, open_places, latitude, longitude, total_steps from Paths where id='+request.params.pageid, function(err1, path, fields) {
 		if (!err1) {
 			if(path.length > 0){
 				connection.query('SELECT * from Objects where path_id='+request.params.pageid, function(err2, objects, fields) {
@@ -90,7 +90,18 @@ app.get('/getPlace/:Placeid', function(request,response){
 	});
 });
 
-app.listen(app.get('port'), function() {
+
+var server = app.listen(app.get('port'), function() {
 	console.log('Node app is running on port', app.get('port'));
 });
 
+var io = require('socket.io')(server);
+var player_number = 0 ;
+
+io.on('connection', function (socket) {
+  socket.emit('number', player_number );
+  player_number++;
+  socket.on('update_position', function (data) {
+    socket.broadcast.emit('updateMap',data);
+  });
+});

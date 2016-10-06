@@ -3,6 +3,9 @@ var check_position_available = true;
 var map;
 var myPosition;
 var current_item;
+var myNumber;
+var others_markers={};
+var socket = io.connect('http://localhost:5000');
 
 function closeContent(delete_media=true){
 	if(delete_media){
@@ -63,25 +66,48 @@ function computeDistance(coords1,coords2){
 
 }
 
-function addMarkerToMap(lat,long){
+function addMarkerToMap(lat,long, color, player=null){
 	if(map){
 		var position = new google.maps.LatLng(lat,long);
-		var iPlace = new google.maps.Marker({
+		var marker = new google.maps.Marker({
 			map: map,
 			position: position,
 			title: "Lieu d'intérêt",
-			icon: "../img/grey_pin.png"
+			icon: "../img/"+color+"_pin.png"
 		});
-		iPlace.setMap(map);
+		if(player){
+			if(others_markers[player]){
+				others_markers[player].setMap(null);
+			}
+			others_markers[player] = marker;
+			others_markers[player].setMap(map);
+		}else{
+			marker.setMap(map);
+		}
+		
 	} else {
 		setTimeout(function(){
-			addMarkerToMap(lat,long);
+			addMarkerToMap(lat,long, color);
 		},500);
 	}
 }
 
+function updateAvancement(){
+	places_visited = 0;
+	for(var i=0;i<places.length;i++){
+		if(places[i].visited){
+			places_visited++;
+		}
+	}
+	document.getElementById("progression_percentage").innerHTML = Math.round(places_visited / total_steps * 100);
+	document.getElementById("visuel_progress").style.width = Math.round(places_visited / total_steps * 100) + "%";
+}
+
 function displayPlace(client_id){
-	displayItem(places[client_id]);
+	var place = places[client_id];
+	place.visited = true;
+	updateAvancement();
+	displayItem(place);
 }
 
 function checkPlaceReached(position){
@@ -96,7 +122,7 @@ function checkPlaceReached(position){
 function revealAllPlaces(){
 	if(window.map && map.getCenter){
 		for(var i=0;i<places.length;i++){
-			addMarkerToMap(places[i].latitude,places[i].longitude);
+			addMarkerToMap(places[i].latitude,places[i].longitude, "grey");
 		}	
 	}else{
 		setTimeout(revealAllPlaces,200);
@@ -118,6 +144,7 @@ function checkPosition(){
 
 		function displayPosition(position){
 			updateMap({lat: position.coords.latitude, lng: position.coords.longitude});
+			socket.emit('update_position', {me: myNumber, lat: position.coords.latitude, lng: position.coords.longitude});
 			checkPlaceReached(position.coords);
 			flashMessage("Votre position a été mise à jour","green");
 			check_position_available = true;
@@ -130,8 +157,9 @@ function checkPosition(){
 
 function addPlaceToList(place){
 	place.type = "p";
+	place.visited = false;
 	places.push(place);
-	addMarkerToMap(place.latitude,place.longitude);
+	addMarkerToMap(place.latitude,place.longitude,"grey");
 	saveProgress();
 }
 
@@ -334,6 +362,7 @@ function passwordSubmit(){
 	var password_input = document.getElementById("password_input");
 	if(password_input.getAttribute("psw") === password_input.value.toLowerCase()){
 		flashMessage("Bien joué ! C'est la bonne réponse.", "green");
+		password_input.value = "";
 		itemSuccess(current_item);
 	}else{
 		flashMessage("Désolé... ce n'est pas la solution.","red");
@@ -387,6 +416,7 @@ function loadProgress(){
 		if(cookiePlaces){
 			places = JSON.parse(cookiePlaces);
 			revealAllPlaces();
+			updateAvancement();
 		}
 		if(cookieObjects){
 			objects = JSON.parse(cookieObjects);
@@ -414,6 +444,15 @@ function updateMenu() {
 	document.querySelector("#menu_path .menu_sub").innerHTML = path_name;
 
 }
+
+socket.on('number', function (nb) {
+    myNumber = nb;
+});
+
+socket.on('updateMap', function (data) {
+	console.log(data);
+	addMarkerToMap(data.lat,data.lng,"yellow",data.me);
+});
 
 updateMenu();
 loadProgress();

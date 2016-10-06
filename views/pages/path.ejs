@@ -3,6 +3,7 @@
 <head>
 	<% include ../partials/header.ejs %>
 	<link rel="stylesheet" type="text/css" href="../css/path.css">
+	<script src="/socket.io/socket.io.js"></script>
 </head>
 
 <body>
@@ -13,7 +14,28 @@
 				<h1><%= path.name %></h1>
 			</div>
 		</div>
+		<div id="progression">
+			<h4>Avancement : <span id="progression_percentage">0</span> %</h4>
+			<div id="visual_progression">
+				<div id="visuel_progress"></div>
+			</div>
+		</div>
 		<div id="position">
+			<div id="legend">
+				<h4>Légende</h4>
+				<div>
+					<img src="../img/red_pin.png">
+					<span>: Ta dernière position enregistrée</span>
+				</div>
+				<div>
+					<img src="../img/grey_pin.png">
+					<span>: Lieux à visiter</span>
+				</div>
+				<div>
+					<img src="../img/yellow_pin.png">
+					<span>: Autres détectives</span>
+				</div>
+			</div>
 			<div id="postion_update" onclick="checkPosition()"><span id="position_content">Vérifier ma position</span></div>
 		</div>
 		<div id="map"></div>
@@ -79,7 +101,7 @@
 	<script type="text/javascript">
 		var path_lat = <%- path.latitude %>;
 		var path_long = <%- path.longitude %>;
-
+		var total_steps = <%- path.total_steps || 43 %>;
 	</script>
 	<script type="text/javascript" src="../scripts/path.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk-e2vIralT717kd6wbv2_gpcSbGyByxM&callback=mapReady" async defer></script>
