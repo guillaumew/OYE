@@ -70,7 +70,8 @@ SET
 	longitude = -1.563055,
 	path_id = 2,
 	places_on_open = "12,13",
-	content = '<p>Dans quel état se trouve notre cher Jules ! Ce dernier semble toutefois pointer du doigt vers la direction qu\'ont pris ses aggresseurs.</p><p>Les voleurs sont partis vers la place Graslin.</p>',
+	content = '<p class=\"tourisme\">En effet, le célèbre romancier est né à Nantes. Nous passerons sur son lieu de naissance plus tard dans le parcours.</p>
+	<p>Dans quel état se trouve notre cher Jules ! Ce dernier semble toutefois pointer du doigt vers la direction qu\'ont pris ses aggresseurs.</p><p>Les voleurs sont partis vers la place Graslin.</p>',
 	content_type = 'img',
 	media = 'img/2/verne.jpg'
 ;
@@ -143,7 +144,9 @@ SET
 	success_key = "sèvre",
 	content_type = "youtube",
 	media = "NoHqoEkqJas",
-	success_content = '<p>L\'animal mytique que tu cherches est un dragon.</p>'
+	success_content = '<p>L\'animal mytique que tu cherches est un dragon.</p>',
+	success_content_type = 'img',
+	success_media = 'img/2/dragonimg.jpg'
 ;
 INSERT INTO Places
 SET
@@ -153,7 +156,9 @@ SET
 	longitude = -1.557486,
 	path_id = 2,
 	places_on_open = "19",
-	content = "<p>Les traces suivent la rue qui porte le même nom que la basilique.</p>",
+	content = '<p>Les traces suivent la rue qui porte le même nom que la basilique.</p>
+	<p class=\"tourisme\">Datant du XIIe siècle, cette église est l\'un des premiers projets néogothiques en France.
+	Partiellement détruite lors de la secondes guerre mondiale, il fallut plus de 20 ans pour la reconstruire (de 1953 à 1974).</p>',
 	content_type = 'img',
 	media = 'img/2/basilique.jpg'
 ;
@@ -180,7 +185,11 @@ SET
 	places_on_open = "21",
 	objects_on_open = "26",
 	content = '<p>A l\'entrée de la rue, tu rammasses une carte à jouer. La peinture sur la carte ne laisse aucun doute : elle est tombée du chariot.</p>
-	<p>Les traces continuent sur la rue de Halles.</p>'
+	<p>Les traces continuent sur la rue de Halles.</p>
+	<p class=\"tourisme\">A propos du cours des 50 otages : cette artère tire son nom d\'un épisode de la seconde guerre mondiale. Le lieutenant-colonel nazi Karl Hotz fut abattu à Nantes par des résistants. En représailles, les autorités allemandes fusillèrent 48 prisonniers pris comme otages.
+	Cette acte de résistance valut à la ville le titre de Compagnon de la Libération.</p>',
+	content_type = "img",
+	media = "img/2/50otages.jpg"
 ;
 
 INSERT INTO Objects
@@ -214,7 +223,8 @@ SET
 	longitude = -1.554152,
 	path_id = 2,
 	places_on_open = "23",
-	content = '<p>Les traces continuent vers la rue du même nom que l\'église, puis vers la rue de la juiverie.</p>',
+	content = '<p>Les traces continuent vers la rue du même nom que l\'église, puis vers la rue de la juiverie.</p>
+	<p class=\"tourisme\">Cet édifice de style classique fut construit au XVIIe siècle.</p>',
 	content_type = 'img',
 	media = 'img/2/croix.jpg'
 ;
@@ -288,11 +298,15 @@ SET
 	longitude = -1.549421,
 	path_id = 2,
 	places_on_success = "28,30",
-	content = '<p>Au milieu de la cours se trouve une oeuvre artistique. Il s\'agit d\'un bateau avec de nombreuses lettres accrochées.</p>
+	content = '<p class=\"tourisme\">Le château des ducs de Bretagne est constitué d’un rempart du XVe siècle et d’édifices divers bâtis du XIVe au XVIIIe siècle, classé monument historique depuis 1840.
+	Il accueillit notamment la duchesse Anne de Bretagne et le duc François II.</p>
+	<p>Au milieu de la cours se trouve une oeuvre artistique. Il s\'agit d\'un bateau avec de nombreuses lettres accrochées.</p>
 	<p>Chaque lettre possède un prénom. Est-ce que tu te souviens du prénom du serveur ?</p>',
+	content_type = 'img',
+	media = 'img/2/bateau_chateau.jpg',
 	success_condition = 'password',
 	success_key = 'nathan',
-	success_content = '<p>Tu retrournes la lettre portant le nom de Nathan. Voici ce qu\'elle contient :</p>
+	success_content = '	<p>Tu retrournes la lettre portant le nom de Nathan. Voici ce qu\'elle contient :</p>
 	<p class=\"quote\">\"Le vendeur doit chercher du matériel pour ouvrir le coffre qui contient mon animal. Il a un contact au Lieu Unique. C\'est donc notre prochaine étape.\"</p>
 	<p>Voici la sortie la plus rapide pour y accéder : </p>',
 	success_content_type = "img",
@@ -333,7 +347,7 @@ SET
 	<p>En fouillant les lieux tu tombes sur un homme ligoté et bailloné. Tu le libères :</p>
 	<p class=\"quote\">\"Je m\'appelle Nathan, je travaille dans un bar à côté. J\'ai suivi un type bizarre pour lui acheter... un animal. Mais quand il a enfin pu ouvrir le coffre qui le renfermait, son complice qui l\'attendait ici est devenu fou. Il m\'a ligotté ici, a dissimulé un animal, puis ils sont tous les deux partis en criant : Redécorrons Bouffay !\"</p>
 	<p>Nathan vous suit afin d\'identifier ses aggresseurs.</p>
-	<p class=\"tourisme\">A 10 min à pied d\'ici (près de la gare SNCF) se trouve le jardin des plantes. Il est décoré par Claude Ponti. Le parcrous ne prévoit pas le détour, mais je vous le recommande si vous avez le temps.</p>',
+	<p class=\"tourisme\">A 10 min à pied d\'ici (près de la gare SNCF) se trouve le jardin des plantes. Il est décoré par Claude Ponti. Le parcours ne prévoit pas le détour, mais je vous le recommande si vous avez le temps.</p>',
 	content_type = 'img',
 	media = "img/2/lu.jpg"
 ;
@@ -405,8 +419,11 @@ SET
 	longitude = -1.554552,
 	path_id = 2,
 	places_on_open = "37",
-	content = '<p class=\"tourisme\">Petite pause dans cette chasse aux bâtiments penchés pour en admirer un autre bien plus droit : la tour de Bretagne. Avec ses 144m, c\'est la 4e tour la plus haute de province. Concrètement, c\'est surtout la plus grosse clé USB jamais construite.</p>
-	<p>Les traces montrent que les complices sont allés à la place du commerce.</p>',
+	content = '<p>Les traces montrent que les complices sont allés à la place du commerce.</p>
+	<p class=\"tourisme\">Petite pause dans cette chasse aux bâtiments penchés pour en admirer un autre bien plus droit : la tour de Bretagne. Avec ses 144m, c\'est la 4e tour la plus haute de province. Concrètement, c\'est surtout la plus grosse clé USB jamais construite.</p>
+	<p class=\"tourisme\">A noter : Jules Verne est né au 4 Cours Olivier de Clisson, juste à côté. 
+	Un plaque commémore l\'endroit.</p>'
+	,
 	content_type = 'img',
 	media = 'img/2/tour.jpg'
 ;
