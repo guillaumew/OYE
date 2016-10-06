@@ -47,7 +47,7 @@ body{
 
 #postion_update{
 	text-align: center;
-    background-color: #121326;
+    background-color: #34B3AC;
     width: 100PX;
     height: 100px;
     border-radius: 50px;
@@ -98,8 +98,8 @@ body{
 	position: absolute!important;
 	top:100px;
 	bottom:100px;
-	left: 5%;
-    width: 90%;
+	left: 0;
+    right: 0;
 }
 
 #main_content{
