@@ -11,7 +11,7 @@ if(host==="localhost"){
 }
 var socket = io.connect(host);
 
-function closeContent(delete_media=true){
+function closeContent(delete_media){
 	if(delete_media){
 		document.getElementById("content_media").innerHTML = "";
 	}
@@ -70,7 +70,7 @@ function computeDistance(coords1,coords2){
 
 }
 
-function addMarkerToMap(lat,long, color, player=null){
+function addMarkerToMap(lat,long, color, player){
 	if(map){
 		var position = new google.maps.LatLng(lat,long);
 		var marker = new google.maps.Marker({
@@ -142,7 +142,7 @@ function checkPosition(){
 		document.getElementById("postion_update").style.backgroundColor = "#14938C";
 		function errorPostion(err){
 			console.log(err);
-			flashMessage("Impossible d'obtenir ta position \n"+err,"red");
+			flashMessage("Impossible d'obtenir ta position \n"+JSON.stringify(err),"red");
 			check_position_available = true;
 			position_content.innerHTML = "Vérifier ma position";
 			document.getElementById("postion_update").style.backgroundColor = "#34B3AC";
