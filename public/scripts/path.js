@@ -376,6 +376,7 @@ function passwordSubmit(){
 	}
 }
 
+
 function pathSucceeded(){
 	displayItemContent("Victoire",successContent);
 }
@@ -459,6 +460,12 @@ socket.on('number', function (nb) {
 socket.on('updateMap', function (data) {
 	console.log(data);
 	addMarkerToMap(data.lat,data.lng,"yellow",data.me);
+});
+
+document.getElementById("password_input").addEventListener("keydown",function(e){
+	if(e.key=="Enter"){
+		passwordSubmit();	
+	}
 });
 
 updateMenu();

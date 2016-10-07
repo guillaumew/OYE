@@ -157,6 +157,7 @@ body{
 #objects{
 	position: fixed;
 	bottom: 0;
+	left:2px;
 	height: 90px;
 	margin: 0;
 	padding: 0;
@@ -185,6 +186,8 @@ body{
     border-radius: 10px 10px 0px 0px;
     transform: rotate(-90deg);
     transform-origin: 0 0;
+    -webkit-transform: rotate(-90deg);
+    -webkit-transform-origin: 0 0;
     bottom: -25px;
     height: 20px;
     padding-top: 5px;
