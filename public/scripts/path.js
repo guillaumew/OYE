@@ -367,7 +367,7 @@ function giveObjects(id, orig){
 
 function passwordSubmit(){
 	var password_input = document.getElementById("password_input");
-	if(password_input.getAttribute("psw") === password_input.value.toLowerCase()){
+	if(password_input.getAttribute("psw") === password_input.value.trim().toLowerCase()){
 		flashMessage("Bien joué ! C'est la bonne réponse.", "green");
 		password_input.value = "";
 		itemSuccess(current_item);
