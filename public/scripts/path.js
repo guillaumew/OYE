@@ -300,6 +300,7 @@ function displayItemContent(name,caption,media_type,media_url, password){
 			var media = document.createElement("iframe");
 			media.src = "https://www.youtube.com/embed/"+media_url;
 			media.setAttribute("allowfullscreen",null);
+			media.classList.add("youtube");
 			media_container.appendChild(media);
 
 			var a = document.createElement("a");
@@ -313,6 +314,7 @@ function displayItemContent(name,caption,media_type,media_url, password){
 		case "iframe":
 			var media = document.createElement(media_type);
 			media.src = "../" + media_url;
+			media.classList.add("media");
 			media_container.appendChild(media);
 			break; 
 

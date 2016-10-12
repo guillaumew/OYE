@@ -137,12 +137,22 @@ body{
 	margin-bottom: 20px;
 }
 
-#current_content iframe{
+#current_content iframe.media{
 	width: 100%;
-    bottom: 0;
-    height: 400px;
+    top: 0;
+    height: 100%;
+    left: 0;
     border: 0;
     overflow: scroll;
+    position: absolute;
+    background-color: #FFFFFF;
+}
+
+#current_content iframe.youtube{
+	width: 100%;
+    height: 450px;
+    left: 0;
+    border: 0;
 }
 
 #current_media, #content_description, #current_content p, #current_content a {
