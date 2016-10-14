@@ -70,7 +70,7 @@ function computeDistance(coords1,coords2){
 
 }
 
-function addMarkerToMap(lat,long, color, player){
+function addMarkerToMap(lat,long, color, markerId){
 	if(map){
 		var position = new google.maps.LatLng(lat,long);
 		var marker = new google.maps.Marker({
@@ -79,19 +79,24 @@ function addMarkerToMap(lat,long, color, player){
 			title: "Lieu d'intérêt",
 			icon: "../img/"+color+"_pin.png"
 		});
-		if(player){
-			if(others_markers[player]){
-				others_markers[player].setMap(null);
+		if(markerId){
+			if(others_markers[markerId]){
+				others_markers[markerId].setMap(null);
 			}
-			others_markers[player] = marker;
-			others_markers[player].setMap(map);
+			others_markers[markerId] = marker;
+			others_markers[markerId].setMap(map);
+			marker.id = markerId;
+			marker.addListener('click', function() {
+				if(marker.id && marker.id.charAt(0) == "p"){
+					displayPlace(parseInt(marker.id.substr(2),10));
+				}
+			});
 		}else{
 			marker.setMap(map);
 		}
-		
 	} else {
 		setTimeout(function(){
-			addMarkerToMap(lat,long, color);
+			addMarkerToMap(lat,long, color,markerId);
 		},500);
 	}
 }
@@ -112,7 +117,7 @@ function displayPlace(client_id){
 	place.visited = true;
 	updateAvancement();
 	displayItem(place);
-	addMarkerToMap(place.latitude,place.longitude, "green", "p-" + place.id);
+	addMarkerToMap(place.latitude,place.longitude, "green", "p-" + client_id);
 }
 
 function checkPlaceReached(position){
@@ -132,7 +137,7 @@ function revealAllPlaces(){
 			} else {
 				var color = "grey";
 			}
-			addMarkerToMap(places[i].latitude,places[i].longitude, color, "p-" + places[i].id);
+			addMarkerToMap(places[i].latitude,places[i].longitude, color, "p-" + places[i].client_id);
 		}	
 	}else{
 		setTimeout(revealAllPlaces,200);
@@ -171,8 +176,9 @@ function checkPosition(){
 function addPlaceToList(place){
 	place.type = "p";
 	place.visited = false;
+	place.client_id = places.length;
 	places.push(place);
-	addMarkerToMap(place.latitude,place.longitude,"grey",place.type + place.id);
+	addMarkerToMap(place.latitude,place.longitude,"grey","p-" + place.client_id);
 	saveProgress();
 }
 
