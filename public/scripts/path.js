@@ -112,6 +112,7 @@ function displayPlace(client_id){
 	place.visited = true;
 	updateAvancement();
 	displayItem(place);
+	addMarkerToMap(place.latitude,place.longitude, "green", "p-" + place.id);
 }
 
 function checkPlaceReached(position){
@@ -126,7 +127,12 @@ function checkPlaceReached(position){
 function revealAllPlaces(){
 	if(window.map && map.getCenter){
 		for(var i=0;i<places.length;i++){
-			addMarkerToMap(places[i].latitude,places[i].longitude, "grey");
+			if (places[i].visited){
+				var color="green";
+			} else {
+				var color = "grey";
+			}
+			addMarkerToMap(places[i].latitude,places[i].longitude, color, "p-" + places[i].id);
 		}	
 	}else{
 		setTimeout(revealAllPlaces,200);
@@ -166,7 +172,7 @@ function addPlaceToList(place){
 	place.type = "p";
 	place.visited = false;
 	places.push(place);
-	addMarkerToMap(place.latitude,place.longitude,"grey");
+	addMarkerToMap(place.latitude,place.longitude,"grey",place.type + place.id);
 	saveProgress();
 }
 
@@ -461,7 +467,7 @@ socket.on('number', function (nb) {
 
 socket.on('updateMap', function (data) {
 	console.log(data);
-	addMarkerToMap(data.lat,data.lng,"yellow",data.me);
+	addMarkerToMap(data.lat,data.lng,"yellow","u-"+data.me);
 });
 
 document.getElementById("password_input").addEventListener("keydown",function(e){
