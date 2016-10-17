@@ -40,7 +40,7 @@
 	animalsList = ["canard","chat asiatique","chat noir","cheval","cigale","cochon","elephant","girafe","hermine", "hippocampe","homard", "lapin","oie","ours","perroquet","tortue","ver","yack"];
 	var choice_el = document.getElementById("choice");
 	for(var i=0; i<animalsList.length;i++){
-		var item = top.objects.find(function(ob){return ob.name.toLowerCase() === animalsList[i];})
+		var item = top.objects.find(function(ob){return ob.name.toLowerCase() === animalsList[i];});
 		if(item){
 			
 			var div_el = document.createElement("div");
