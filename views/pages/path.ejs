@@ -102,17 +102,9 @@
 		var path_lat = <%- path.latitude %>;
 		var path_long = <%- path.longitude %>;
 		var total_steps = <%- path.total_steps || 43 %>;
+		var initial_place = "<%- path.open_places %>";
 	</script>
 	<script type="text/javascript" src="../scripts/path.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk-e2vIralT717kd6wbv2_gpcSbGyByxM&callback=mapReady" async defer></script>
-	<script type="text/javascript">
-		var initial_place = "<%- path.open_places %>";
-		if(initial_place.length > 0){
-			var array_places = initial_place.split(",");
-			for(var i=0;i<array_places.length;i++){
-				openPlace(array_places[i]);
-			}
-		}
-	</script>
 </body>
 </html>

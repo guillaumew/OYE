@@ -90,6 +90,16 @@ app.get('/getPlace/:Placeid', function(request,response){
 	});
 });
 
+app.get('/getPlaces/:Pathid', function(request,response){
+	connection.query('SELECT * from Places where path_id='+request.params.Pathid, function(err, raws, fields) {
+		if (!err) {
+			response.json(raws);
+		}else{
+			response.json({"error" : err});
+			console.log(err);
+		}
+	});
+});
 
 var server = app.listen(app.get('port'), function() {
 	console.log('Node app is running on port', app.get('port'));

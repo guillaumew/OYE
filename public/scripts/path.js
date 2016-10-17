@@ -5,6 +5,9 @@ var myPosition;
 var current_item;
 var myNumber;
 var others_markers={};
+var images_loaded;
+var images_to_load;
+var preload_warning;	
 var host = window.location.hostname;
 if(host==="localhost"){
 	host="http://localhost:5000/";
@@ -134,10 +137,11 @@ function revealAllPlaces(){
 		for(var i=0;i<places.length;i++){
 			if (places[i].visited){
 				var color="green";
-			} else {
+				addMarkerToMap(places[i].latitude,places[i].longitude, color, "p-" + places[i].client_id);
+			} else if (places[i].is_open) {
 				var color = "grey";
+				addMarkerToMap(places[i].latitude,places[i].longitude, color, "p-" + places[i].client_id);
 			}
-			addMarkerToMap(places[i].latitude,places[i].longitude, color, "p-" + places[i].client_id);
 		}	
 	}else{
 		setTimeout(revealAllPlaces,200);
@@ -177,14 +181,15 @@ function addPlaceToList(place){
 	place.type = "p";
 	place.visited = false;
 	place.client_id = places.length;
+	place.is_open = true;
 	places.push(place);
 	addMarkerToMap(place.latitude,place.longitude,"grey","p-" + place.client_id);
 	saveProgress();
 }
 
-function getPlace(id, callback){
+function getPlaces(id, callback){
 	var req = new XMLHttpRequest();
-	req.open('GET', '/getPlace/'+id, true);
+	req.open('GET', '/getPlaces/'+id, true);
 	req.onreadystatechange = function (aEvt) {
 		if (req.readyState == 4) {
 			if(req.status == 200){
@@ -195,6 +200,17 @@ function getPlace(id, callback){
 		}
 	};
 	req.send(null);
+}
+
+function initPlaces(received_places){
+	places = received_places;
+	if(initial_place.length > 0){
+		var array_places = initial_place.split(",");
+		for(var i=0;i<array_places.length;i++){
+			openPlace(array_places[i]);
+		}
+	}
+	revealAllPlaces();
 }
 
 function getObjectClientId(id){
@@ -218,7 +234,7 @@ function checkIfObjectExists(id){
 
 function checkIfPlaceExists(id){
 	for(var i=0;i<places.length;i++){
-		if(places[i].id == id){
+		if(places[i].id == id && places[i].is_open){
 			return true;
 		}
 	}
@@ -227,7 +243,7 @@ function checkIfPlaceExists(id){
 
 function openPlace(id){
 	if(!checkIfPlaceExists(id)){
-		getPlace(id,addPlaceToList);
+		addPlaceToList( places.find(function(place){return place.id == id;}) );
 	}
 }
 
@@ -437,9 +453,12 @@ function loadProgress(){
 
 		if(cookiePlaces){
 			places = JSON.parse(cookiePlaces);
-			revealAllPlaces();
 			updateAvancement();
+			revealAllPlaces();
+		}else{
+			getPlaces(path_id,initPlaces);
 		}
+
 		if(cookieObjects){
 			objects = JSON.parse(cookieObjects);
 			for(var i=0;i<objects.length;i++){
@@ -462,9 +481,51 @@ function updateMenu() {
 	p_el1.setAttribute("onclick", "deleteProgress()");
 	container.appendChild(p_el1);
 
+	var p_el2 = document.createElement("p");
+	p_el2.innerHTML = "Précharger le parcours";
+	p_el2.setAttribute("onclick", "preloadAssets()");
+	container.appendChild(p_el2);
+
 	container.style.display = "block";
 	document.querySelector("#menu_path .menu_sub").innerHTML = path_name;
 
+}
+
+function preloadAssets(){
+	images_loaded = 0;
+	images_to_load = 0;
+	preload_warning = null;
+	for(var i=0;i<places.length;i++){
+		preloadAsset( places[i].content_type , "../" + places[i].media );
+		preloadAsset( places[i].success_content_type,  "../" + places[i].success_media);
+	}
+	for(var i=0;i<objects.length;i++){
+		preloadAsset( objects[i].content_type , "../" + objects[i].media );
+		preloadAsset( objects[i].success_content_type,  "../" + objects[i].success_media);
+	}
+}
+
+function preloadAsset(media_type,media_url){
+	switch (media_type){
+		case "img" :
+			images_to_load++;
+			var img = new Image();
+			img.src=media_url;
+			img.onload = function(){
+				images_loaded++;
+				if(images_loaded != images_to_load){
+					flashMessage("Progression : " + images_loaded + "/" + images_to_load, "grey");
+				}else if(!preload_warning){
+					flashMessage("Le parcours a été préchargé. Vous n'avez plus besoin d'une connexion à internet stable.", "green");
+				}else{
+					flashMessage("Les images ont bien été préchargées, mais "+preload_warning, "orange")
+				}
+				
+			}
+			break;
+		case "youtube" :
+			preload_warning="Certaines videos n'ont pas pu être préchargée."
+	}
 }
 
 socket.on('number', function (nb) {
