@@ -323,6 +323,45 @@ function displayItemContent(name,caption,media_type,media_url, password){
 
 			break;
 
+		case "group":
+			var subIds = media_url.split(",");
+			var subObjects = [];
+			for(var i=0;i<subIds.length;i++){
+				subObjects.push(objects[ getObjectClientId(subIds[i]) ]);
+			}
+			subObjects.sort(function(a,b){
+				return a.name.localeCompare(b.name);
+			});
+
+			var groupContainer = document.createElement("div");
+			groupContainer.classList.add("groupContainer");
+			media_container.appendChild(groupContainer);
+
+			for(var i=0;i<subObjects.length;i++){
+				var item = subObjects[i];
+
+				var subItem = document.createElement("div");
+				subItem.classList.add("object");
+				subItem.classList.add("sub_object");
+
+				var itemImage = document.createElement('img');
+				itemImage.src = "../"+item.thumb;
+				subItem.appendChild(itemImage);
+
+				var itemTitle = document.createElement("span");
+				itemTitle.innerHTML = item.name;
+				itemTitle.classList.add("object_title");
+				if(item.is_succeeded){
+					itemTitle.classList.add("found");
+				}
+				subItem.appendChild(itemTitle);
+
+				subItem.setAttribute("onclick", "displayObject("+item.client_id+")");
+				groupContainer.appendChild(subItem);
+			}
+
+			break;
+
 		case "youtube":
 
 			var media = document.createElement("iframe");

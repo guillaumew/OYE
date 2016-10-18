@@ -18,6 +18,8 @@
 
 <script type="text/javascript">
 	var isMenuOpen = false;
+	var flashOn;
+
 	function toggleMenu() {
 		var menu_el = document.getElementById("menu");
 		if(isMenuOpen){
@@ -55,10 +57,11 @@
 	}
 
 	function flashMessage(message,color){
+		window.clearTimeout(flashOn);
 		flash_el = document.getElementById("flash_message");
 		flash_el.innerHTML = message;
 		flash_el.style.background = color;
 		flash_el.style.display = "block";
-		setTimeout(hideflash,2000);
+		flashOn = setTimeout(hideflash,2000);
 	}
 </script>
