@@ -313,6 +313,7 @@ function displayItemContent(name,caption,media_type,media_url, password){
 
 			var media = document.createElement(media_type);
 			media.src = "../" + media_url;
+			media.setAttribute("controls",null);
 			media_container.appendChild(media);
 
 			var a = document.createElement("a");
@@ -544,6 +545,17 @@ function preloadAssets(){
 	}
 }
 
+function itemPreloaded(){
+	images_loaded++;
+	if(images_loaded != images_to_load){
+		flashMessage("Progression : " + images_loaded + "/" + images_to_load, "grey");
+	}else if(!preload_warning){
+		flashMessage("Le parcours a été préchargé. Vous n'avez plus besoin d'une connexion à internet stable.", "green");
+	}else{
+		flashMessage("Le parcours ont bien été préchargé, mais "+preload_warning, "orange")
+	}
+}
+
 function preloadAsset(media_type,media_url){
 	switch (media_type){
 		case "img" :
@@ -551,17 +563,27 @@ function preloadAsset(media_type,media_url){
 			var img = new Image();
 			img.src=media_url;
 			img.onload = function(){
-				images_loaded++;
-				if(images_loaded != images_to_load){
-					flashMessage("Progression : " + images_loaded + "/" + images_to_load, "grey");
-				}else if(!preload_warning){
-					flashMessage("Le parcours a été préchargé. Vous n'avez plus besoin d'une connexion à internet stable.", "green");
-				}else{
-					flashMessage("Les images ont bien été préchargées, mais "+preload_warning, "orange")
-				}
-				
+				itemPreloaded();
 			}
 			break;
+		case "video" :
+			images_to_load++;
+			var req = new XMLHttpRequest();
+			req.open('GET', media_url, true);
+			req.responseType = 'blob';
+
+			req.onload = function() {
+			   if (this.status === 200) {
+			      itemPreloaded();
+			   }
+			}
+			req.onerror = function() {
+			   flashMessage("Erreur dans le chargement de " + media_url)
+			}
+
+			req.send();
+			break;
+
 		case "youtube" :
 			preload_warning="Certaines videos n'ont pas pu être préchargée."
 	}

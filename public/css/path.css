@@ -137,6 +137,10 @@ body{
 	margin-bottom: 20px;
 }
 
+#current_content video{
+	width:100%;
+}
+
 #current_content iframe.media{
 	width: 100%;
     top: 0;
