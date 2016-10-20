@@ -356,7 +356,7 @@ function displayItemContent(name,caption,media_type,media_url, password){
 		case "youtube":
 
 			var media = document.createElement("iframe");
-			media.src = "https://www.youtube.com/embed/"+media_url;
+			media.src = "https://www.youtube.com/embed/"+media_url+"?hl=fr&amp;cc_lang_pref=fr&amp;cc_load_policy=1";
 			media.setAttribute("allowfullscreen",null);
 			media.classList.add("youtube");
 			media_container.appendChild(media);
