@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<% include ../partials/header.ejs %>
+	<% var title = path.name %>
+	<% include ../partials/header.ejs title %>
 	<link rel="stylesheet" type="text/css" href="../css/path.css">
 	<script src="/socket.io/socket.io.js"></script>
 </head>

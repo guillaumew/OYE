@@ -212,7 +212,7 @@ function initPlaces(received_places){
 	if(initial_place.length > 0){
 		var array_places = initial_place.split(",");
 		for(var i=0;i<array_places.length;i++){
-			OpenPlace(array_places[i]);
+			openPlace(array_places[i]);
 		}
 	}
 	revealAllPlaces();
