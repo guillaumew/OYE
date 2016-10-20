@@ -111,8 +111,8 @@ function updateAvancement(){
 			places_visited++;
 		}
 	}
-	document.getElementById("progression_percentage").innerHTML = Math.round(places_visited / total_steps * 100);
-	document.getElementById("visuel_progress").style.width = Math.round(places_visited / total_steps * 100) + "%";
+	document.getElementById("progression_percentage").innerHTML = Math.round(places_visited / places.length * 100);
+	document.getElementById("visuel_progress").style.width = Math.round(places_visited / places.length * 100) + "%";
 }
 
 function displayPlace(client_id){
@@ -177,14 +177,13 @@ function checkPosition(){
 
 }
 
-function addPlaceToList(place){
-	place.type = "p";
-	place.visited = false;
-	place.client_id = places.length;
-	place.is_open = true;
-	places.push(place);
-	addMarkerToMap(place.latitude,place.longitude,"grey","p-" + place.client_id);
-	saveProgress();
+function openPlace(id){
+	var place = places.find(function(place){return place.id == id;});
+	if(place && !place.is_open){
+		place.is_open = true;
+		addMarkerToMap(place.latitude,place.longitude,"grey","p-" + place.client_id);
+		saveProgress();
+	}
 }
 
 function getPlaces(id, callback){
@@ -204,10 +203,16 @@ function getPlaces(id, callback){
 
 function initPlaces(received_places){
 	places = received_places;
+	for(var i=0;i<places.length;i++){
+		places[i].type = "p";
+		places[i].visited = false;
+		places[i].client_id = i;
+		places[i].is_open = false;
+	}
 	if(initial_place.length > 0){
 		var array_places = initial_place.split(",");
 		for(var i=0;i<array_places.length;i++){
-			openPlace(array_places[i]);
+			OpenPlace(array_places[i]);
 		}
 	}
 	revealAllPlaces();
@@ -230,21 +235,6 @@ function checkIfObjectExists(id){
 		}
 	}
 	return false;
-}
-
-function checkIfPlaceExists(id){
-	for(var i=0;i<places.length;i++){
-		if(places[i].id == id && places[i].is_open){
-			return true;
-		}
-	}
-	return false;
-}
-
-function openPlace(id){
-	if(!checkIfPlaceExists(id)){
-		addPlaceToList( places.find(function(place){return place.id == id;}) );
-	}
 }
 
 
